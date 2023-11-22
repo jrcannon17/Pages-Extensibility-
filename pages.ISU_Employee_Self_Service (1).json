@@ -1,0 +1,706 @@
+{
+   "constantName": "ISU_Employee_Self_Service",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2023-11-17T20:36:12Z",
+   "modelView": {
+      "components": [
+         {
+            "resource": "virtualDomains.ISU_VD_Employee_Self_Service_OIT_User_Roles",
+            "name": "ISU_VD_Employee_Self_Service_OIT_User_Roles",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ISU_VD_Employee_Self_Service_User_Roles",
+            "name": "ISUEmployeeSelfService_User_Roles_Registrar",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "name": "ISUEmployeeSelfService_child_5",
+            "type": "literal",
+            "value": "<!--<table style=\"width:100%;\"><tr><td colspan=2 style=\"width:100%;vertical-align:top\">-->"
+         },
+         {
+            "components": [
+               {
+                  "readonly": true,
+                  "name": "ISUEmployeeSelfService_User_Val1",
+                  "onLoad": "var now1 = new Date().getTime().toString();console.log(\"OIT LOAD TIME:\"+now1+'<-----------');global_ISUemployee1 = $ISUEmployeeSelfService_User_Val1;console.log(\"Text box Loaded!  \"+ global_ISUemployee1.USER_VAL + \" ....thats the value\");console.log('Here I am');//console.log(\"Text box Loaded!  \"+ $ISUEmployeeSelfService_User_Val1.USER_VAL + \" ....thats the value\");",
+                  "model": "ISU_VD_Employee_Self_Service_OIT_User_Roles.USER_VAL",
+                  "style": "hidden",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "components": [],
+                  "readonly": true,
+                  "name": "ISUEmployeeSelfService_User_Val2",
+                  "onLoad": "var now2 = new Date().getTime().toString();console.log('REGISTRAR LOAD TIME: '+now2+' <-----------');global_ISUemployee = $ISUEmployeeSelfService_User_Val2;console.log(\"Text box Loaded!  \"+ global_ISUemployee .USER_VAL + \" ....thats the value\");console.log('Here I am');//console.log(\"Text box Loaded!  \"+ $ISUEmployeeSelfService_User_Val2.USER_VAL + \" ....thats the value\");",
+                  "model": "ISUEmployeeSelfService_User_Roles_Registrar.USER_VAL",
+                  "style": "hidden",
+                  "loadInitially": true,
+                  "type": "text",
+                  "parameters": {},
+                  "onUpdate": "",
+                  "validation": {},
+                  "required": false
+               },
+               {
+                  "documentation": "",
+                  "name": "TabLinks_Logic",
+                  "type": "literal",
+                  "value": "<script>\n\nfunction selectPage(page) {\tvar i, tabcontent;\t\ttabcontent = document.getElementsByClassName(\"tabcontent\");\tfor (i = 0; i < tabcontent.length; i++) {         \t\tif (i==page)\t\t\ttabcontent[i].style.display = \"block\"; \t\telse\t\t\ttabcontent[i].style.display = \"none\";     \t}\t}</script>"
+               },
+               {
+                  "name": "ISUEmployeeSelfService_JS_Functions",
+                  "type": "literal",
+                  "value": "<script>\nvar now2nd= new Date().getTime().toString();\nconsole.log(now2nd+' <----- Script Load Time');\n\n/*$(document).ready(function() {   //same as: $(function() { \n     console.log(\"hi 1\")});\n\n*/\n\n$(document).ready(function() {\nfunction delayedFunction() {\n     console.log(\"Ready!\");\n     var now2= new Date().toString();\n     console.log(now2);\n     var myVal1 = $('#pbid-ISUEmployeeSelfService_User_Val1').val();\n     console.log(myVal1 + \" <-- Value for OIT\");\n     console.log(myVal1);\n\n     var myVal = $('#pbid-ISUEmployeeSelfService_User_Val2').val();\n     console.log(myVal + \" <-- Value for Registrar\");\n     console.log(myVal);\n    // console.log(\"Valid? \" + global_ISUemployee);\n    //console.log(\"Literal Loaded!  \"+ global_ISUemployee.'USER_VAL' + \" ....thats the value\");\n\n    var OITTabs = document.getElementById(\"pbid-TabLinks_OIT-container\");\n    var RegistrarTabs = document.getElementById(\"pbid-TabLinks_Registrar-container\");\n    \nif(myVal1 === 'Y') {\n       \n       console.log(myVal1);\n\n       OITTabs.style.display = \"block\"; \n       console.log(\"User Validation Approved!\");\n       \n} else {\n\n       OITTabs.style.display = \"none\";\n       console.log(\"Validation Not Approved!\");\n       //alert( \"You Are Not Authorized to View Certain Elements on this page\");\n   \n}\n    if(myVal === 'Y') {  \n        console.log(myVal);\n       RegistrarTabs.style.display = \"block\"; \n       console.log(\"User Validation Approved!\");\n\n    } else {\n       \n       RegistrarTabs.style.display = \"none\";\n       console.log(\"Validation Not Approved!\");\n       //alert( \"You Are Not Authorized to View Certain Elements on this page\");\n   }\n}    \nsetTimeout(delayedFunction, 254)\n//208\n});\n\n\n</script>"
+               },
+               {
+                  "onClick": "selectPage(0);",
+                  "name": "TabLinks_EmployeeServices",
+                  "label": "Employee Services",
+                  "type": "button"
+               },
+               {
+                  "onClick": "selectPage(1);",
+                  "name": "TabLinks_FinanceServices",
+                  "label": "Finance Services",
+                  "type": "button"
+               },
+               {
+                  "onClick": "selectPage(2);",
+                  "name": "TabLinks_Miscellaneous",
+                  "label": "Additional Services",
+                  "type": "button"
+               },
+               {
+                  "onClick": "selectPage(3);",
+                  "name": "TabLinks_Registrar",
+                  "label": "Registrar Services",
+                  "type": "button"
+               },
+               {
+                  "onClick": "selectPage(4);",
+                  "name": "TabLinks_OIT",
+                  "label": "OIT Services",
+                  "type": "button"
+               }
+            ],
+            "name": "TabLinks",
+            "style": "tab",
+            "showInitially": true,
+            "label": "&nbsp;Employee Self-Service",
+            "type": "block"
+         },
+         {
+            "name": "ISUEmployeeSelfService_child_8",
+            "type": "literal",
+            "value": "</td><tr><td style=\"width:50%;vertical-align:top\">"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "name": "ISUEmployeeSelfService_Boundary1",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "ISUEmployeeSelfService_EmployeeDashboard",
+                        "description": "Employee Dashboard - View Pay, Tax, Earnings, and Deduction information",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/EmployeeSelfService/ssb/hrDashboard#/hrDashboard"
+                     },
+                     {
+                        "name": "ISUEmployeeSelfService_FERPAAcknowledgement",
+                        "description": "FERPA Acknowledgement",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/BannerExtensibility/customPage/page/ISU_FERPA"
+                     },
+                     {
+                        "name": "ISUEmployeeSelfService_MyProfile",
+                        "description": "My Profile - Update Address, Phone, Email, Emergency Contact Information",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/BannerGeneralSsb/ssb/general#/home"
+                     },
+                     {
+                        "valueStyle": "",
+                        "onClick": "",
+                        "documentation": "***20231011\n\nnamed changed from prefic Misc. -----> ISUEmployeeSelfService.",
+                        "name": "ISUEmployeeSelfService_SpouseInformation",
+                        "description": "Spouse Information (for directory only)",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/BannerExtensibility/customPage/page/ISU_SpouseUpdateInfo"
+                     },
+                     {
+                        "valueStyle": "",
+                        "onClick": "",
+                        "documentation": "***20231011\n\nnamed changed from prefic Misc. -----> ISUEmployeeSelfService.",
+                        "name": "ISUEmployeeSelfService_ViewUpdate_Sponsored_Affiliates",
+                        "description": "View/Update Sponsored Affiliates",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/BannerExtensibility/customPage/page/ISU_SELECT_AFFILIATE_PAGE"
+                     }
+                  ],
+                  "name": "ISUEmployeeSelfService_Employee_Services",
+                  "showInitially": true,
+                  "label": "Employee Services",
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "name": "ISUEmployeeSelfService_Boundary2",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "ISUEmployeeSelfService_ActiveEmployee",
+                        "description": "Active Employee / Student Search",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/BannerExtensibility/customPage/page/ISU_EmployeeStudentSearch"
+                     },
+                     {
+                        "documentation": "*20231011\n\nMoved from Misc. Tab over to Additional Services Tab",
+                        "name": "ISUEmployeeSelfService_CommunicationManagement",
+                        "description": "Communication Management",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/CommunicationManagement/"
+                     },
+                     {
+                        "name": "ISUEmployeeSelfService_Qview_Overhead_View",
+                        "description": "Qview Counselor View",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devlinteract.indstate.edu/pls/devl/bwzkqvue.P_SelectOffice"
+                     },
+                     {
+                        "valueStyle": "",
+                        "onClick": "",
+                        "name": "ISUEmployeeSelfService_Scholarship_Info_and_Laptop_Assignment",
+                        "description": "Scholarship Info & Laptop Assignment",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/c/SSB?pkg=bwzklptp.P_StudentInfo"
+                     },
+                     {
+                        "valueStyle": "",
+                        "onClick": "",
+                        "name": "ISUEmployeeSelfService_Scholarship_Reporting_Page",
+                        "description": "Scholarship Reporting Page",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devlinteract.indstate.edu/pls/devl/bwzklptp.P_DisplayScholarships"
+                     },
+                     {
+                        "valueStyle": "",
+                        "onClick": "",
+                        "documentation": "***20231011\n\nnamed changed from prefic Misc. -----> ISUEmployeeSelfService.\n\n\nhttps://devl-bansvc.indstate.edu/BannerExtensibility/customPage/page/ISU_SpouseUpdateInfo\n\nhttps://clnt-beis-sso.indstate.edu/ssomanager/c/SSB?pkg=twbkwbis.P_GenMenu?name=bmenu.P_DeptMnu\n\n\nhttps://clnt-beis-sso.indstate.edu/ssomanager/c/SSB?pkg=gz_isu_security.P_InvokeApp?portal_app=SPS_SYSTEM_URL&user_mode=PORTAL",
+                        "name": "ISUEmployeeSelfService_Student_Participation_System",
+                        "description": "Student Participation System",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/saml/login?relayState=/c/auth/SSB?pkg=gz_isu_security.P_InvokeApp%3Fportal_app%3DSPS_SYSTEM_URL%26user_mode%3DPORTAL"
+                     }
+                  ],
+                  "name": "ISUEmployeeSelfService_More_Helpful_Links",
+                  "showInitially": true,
+                  "label": "More Helpful Links:",
+                  "type": "block"
+               }
+            ],
+            "name": "EmployeeSelfService",
+            "showInitially": true,
+            "style": "tabcontent",
+            "label": "",
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "components": [],
+                        "name": "Finance_Boundary9",
+                        "label": "",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "Finance_BudgetDevelopment",
+                        "description": "Budget Development",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/FinanceSelfService/ssb/budgetDevelopment#!/dashboard/bd"
+                     },
+                     {
+                        "name": "Finance_DirectDepositforAccountsPayableandStudentRefunds",
+                        "description": "Direct Deposit for Accounts Payable and Student Refunds",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/BannerGeneralSsb/ssb/directDeposit#/directDepositListing"
+                     },
+                     {
+                        "name": "Finance_FinanceDashboard",
+                        "description": "Finance Dashboard",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/FinanceSelfService/ssb/financeCommonDashboard"
+                     },
+                     {
+                        "name": "Finance_HowToAccessMyEbills",
+                        "description": "How To Access My e-Bills",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "http://www.indstate.edu/payisu"
+                     },
+                     {
+                        "name": "Finance_RemoveStudentPrint1098TOptOut",
+                        "description": "Remove Student Print 1098T Opt Out",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/BannerExtensibility/customPage/page/ISU_1098TOptOutAdmin"
+                     },
+                     {
+                        "name": "Finance_ViewAnEmployeesWH4",
+                        "description": "View an Employee's WH-4",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/BannerExtensibility/customPage/page/ISU_WH4_TaxForm_Admin"
+                     },
+                     {
+                        "name": "Finance_W2_Instructions",
+                        "description": "W-2 Instructions",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://www.indstate.edu/sites/default/files/media/payroll/images/w2-instructions-and-notice-to-employees-2022.jpg"
+                     },
+                     {
+                        "name": "Finance_1098T",
+                        "description": "1098-T (Tuition Statement)",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://www2.indstate.edu/controller/tax/1098-T.html"
+                     },
+                     {
+                        "name": "Finance_1098TOptOutofPrintedCopy",
+                        "description": "1098T Opt Out of Printed Copy",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/BannerExtensibility/customPage/page/ISU_1098TOptOut"
+                     }
+                  ],
+                  "name": "Finance_FinanceServices",
+                  "showInitially": true,
+                  "label": "Finance Services",
+                  "type": "block"
+               }
+            ],
+            "name": "Finance",
+            "style": "tabcontent",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "name": "Miscellaneous_Boundary4",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "Miscellaneous_CourseSiteDeleteRequest",
+                        "description": "Course Site Delete Request",
+                        "style": "hidden",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://indstate.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19150"
+                     },
+                     {
+                        "name": "Miscellaneous_CourseSiteRequest",
+                        "description": "Course Site Request",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://indstate.teamdynamix.com/TDClient/1851/Portal/Requests/ServiceDet?ID=50585"
+                     },
+                     {
+                        "name": "Miscellaneous_RequestLoginIDs",
+                        "description": "Request Login IDs for non-ISU Users",
+                        "style": "hidden",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://indstate.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19683"
+                     },
+                     {
+                        "name": "Miscellaneous_ReportIssue",
+                        "description": "Report an Issue",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://indstate.teamdynamix.com/TDClient/1851/Portal/Requests/ServiceDet?ID=50317"
+                     }
+                  ],
+                  "name": "Miscellaneous_Blackboard",
+                  "showInitially": true,
+                  "label": "Canvas",
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "name": "Miscellaneous_Boundary5",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "Miscellaneous_Athletics",
+                        "description": "Athletics",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "http://www.gosycamores.com/"
+                     },
+                     {
+                        "name": "Miscellaneous_BusinessEngagementCenter",
+                        "description": "Business Engagement Center",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "http://www.indstate.edu/businessengagement/"
+                     },
+                     {
+                        "name": "Miscellaneous_CurriculogInstructionsforApproving",
+                        "description": "Curriculog Instructions for Approving Fee Proposals",
+                        "style": "hidden",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://isuportal.indstate.edu/secure/Curriculog-Approving-Special-Course-Fee-Proposals.pdf"
+                     },
+                     {
+                        "name": "Miscellaneous_CurriculogInstructionsforSubmitting",
+                        "description": "Curriculog Instructions for Submitting Fee Proposals",
+                        "style": "hidden",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://isuportal.indstate.edu/secure/Curriculog-Instructions-for-Submitting-Special-Course-Fee-Proposals.pdf"
+                     },
+                     {
+                        "valueStyle": "",
+                        "name": "Miscellaneous_Curriculog_User_Guide",
+                        "description": "Curriculog User Guide",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://sycamoresindstate-my.sharepoint.com/:b:/r/personal/elizabeth_tomlinson_indstate_edu/Documents/Curriculog_Academic%20Notes/Curriculog%20User%20Guide%20(1).pdf?csf=1&web=1&e=RcV9jZ"
+                     },
+                     {
+                        "name": "Miscellaneous_CurriculogUserGuide",
+                        "description": "Curriculog User Guide",
+                        "style": "hidden",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://isuportal.indstate.edu/secure/CurriculogUserGuide.pdf"
+                     },
+                     {
+                        "name": "Miscellaneous_EmployeeHandbook",
+                        "description": "Employee Handbook",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://www.indstate.edu/policy-library/employee-policies"
+                     },
+                     {
+                        "name": "Miscellaneous_HumanResources",
+                        "description": "Human Resources",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "http://www.indstate.edu/humres"
+                     },
+                     {
+                        "name": "Miscellaneous_ISUEvents",
+                        "description": "ISU Events (mobile/tablet friendly)",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://cms.indstate.edu/all-events-portal/Staff"
+                     },
+                     {
+                        "name": "Miscellaneous_ISUHomepage",
+                        "description": "ISU Homepage",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "http://www.indstate.edu/home.php"
+                     },
+                     {
+                        "name": "Miscellaneous_IntramuralsFitnessRecreation",
+                        "description": "Intramurals, Fitness & Recreation",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "http://www.indstate.edu/recsport/"
+                     },
+                     {
+                        "name": "Miscellaneous_Payroll",
+                        "description": "Payroll",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "http://www.indstate.edu/payroll/"
+                     },
+                     {
+                        "name": "Miscellaneous_RAVEAlert",
+                        "description": "RAVE Alert (Emergency Notification)",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://www.getrave.com/login/indstate"
+                     },
+                     {
+                        "documentation": "*20231011\n\nmoved from Employee Services -----------------> Additional Services Misc.",
+                        "name": "Miscellaneous_SelfServiceMenu",
+                        "description": "Self-Service Menu",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/c/SSB?pkg=twbkwbis.P_GenMenu?name=bmenu.P_MainMnu"
+                     }
+                  ],
+                  "name": "Miscellaneous_Miscellaneous",
+                  "showInitially": true,
+                  "label": "Miscellaneous",
+                  "type": "block"
+               }
+            ],
+            "name": "Miscellaneous",
+            "style": "tabcontent",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "name": "ISUEmployeeSelfService_child_6",
+            "type": "literal",
+            "value": "<!-- </td><td style=\"width:100%;vertical-align:text-top; padding-left:8px\"> -->"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "name": "Registrar_Boundary9",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "onClick": "",
+                        "documentation": "https://devlinteract.indstate.edu/pls/devl/bwzkgrad.p_cancel\n\n\nwindows.href = \"https://devl-beis-sso.indstate.edu/ssomanager/c/SSB?pkg=bwzkgrad.p_cancel\"",
+                        "name": "Cancel_Grad_App",
+                        "description": "Cancel Grad App",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/c/SSB?pkg=bwzkgrad.p_cancel"
+                     },
+                     {
+                        "valueStyle": "",
+                        "onClick": "",
+                        "documentation": "window.href = \"https://devl-beis-sso.indstate.edu/ssomanager/c/SSB?pkg=bwzkchdgre.p_cancel\";",
+                        "name": "Change_Degree_Program_Cancel",
+                        "description": "Change Degree Program - Cancel",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/saml/login?relayState=/c/auth/SSB?pkg=https://devlinteract.indstate.edu/pls/devl/bwzkchdgre.p_cancel"
+                     },
+                     {
+                        "onClick": "",
+                        "name": "Course_Attribute_Maintenance",
+                        "description": "Course Attribute Maintenance",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/c/SSB?pkg=course_attr_maint.P_Main"
+                     },
+                     {
+                        "valueStyle": "",
+                        "onClick": "",
+                        "documentation": "https://devl-beis-sso.indstate.edu/ssomanager/saml/login?relayState=/c/auth/SSB?pkg=https://devlinteract.indstate.edu/pls/devl/bwzkdelso.p_main",
+                        "name": "Delete_SHRDGMR_Records",
+                        "description": "Delete SHRDGMR Records",
+                        "style": "",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devlinteract.indstate.edu/pls/devl/bwzkdelso.p_main"
+                     },
+                     {
+                        "onClick": "",
+                        "name": "Mass_Course_Attribute_Maintenance",
+                        "description": "Mass Course Attribute Maintenance",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/c/SSB?pkg=mass_crse_attr_maint.P_Main"
+                     },
+                     {
+                        "onClick": "",
+                        "name": "PreRequisite_Maintenance",
+                        "description": "PreRequisite Maintenance",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/c/SSB?pkg=prereq_maint.P_Main"
+                     },
+                     {
+                        "name": "Registrar_Qview_Overhead_View",
+                        "description": "Qview Counselor View",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devlinteract.indstate.edu/pls/devl/bwzkqvue.P_SelectOffice"
+                     },
+                     {
+                        "onClick": "",
+                        "name": "Room_Assignment_Maintenance",
+                        "description": "Room Assignment Maintenance",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/c/SSB?pkg=bwzk_room_assign_maint.P_Main"
+                     }
+                  ],
+                  "name": "Registrar_RegistrarServices",
+                  "showInitially": true,
+                  "label": "Registrar Services",
+                  "type": "block"
+               }
+            ],
+            "name": "Registrar",
+            "style": "tabcontent",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "components": [],
+                        "name": "OIT_Boundary_9",
+                        "label": "",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "OIT_Help_Desk_Manager",
+                        "description": "Help Desk Manager",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/BannerExtensibility/customPage/page/ISU_Help_Manager_Page"
+                     },
+                     {
+                        "name": "OIT_Services_child_5",
+                        "description": "Page Builder Developer",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": true,
+                        "url": "https://devl-bansvc.indstate.edu/BannerExtensibility/"
+                     },
+                     {
+                        "valueStyle": "",
+                        "name": "OIT_WebTailor_Administration",
+                        "description": "WebTailor Administration",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/saml/login?relayState=/c/auth/SSB?pkg=https://devlinteract.indstate.edu/pls/devl/twbkwbis.P_GenMenu?name=bmenu.P_WebTailorMnu"
+                     }
+                  ],
+                  "name": "OIT_Services",
+                  "showInitially": true,
+                  "label": "OIT Services",
+                  "type": "block"
+               }
+            ],
+            "name": "OIT",
+            "style": "tabcontent",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "name": "ISUEmployeeSelfService_InitializationScript",
+            "type": "literal",
+            "value": "<script>let global_ISUemployee; window.addEventListener('load', function() {var i, tabcontent;\t\ttabcontent = document.getElementsByClassName(\"tabcontent\");\tfor (i = 1; i < tabcontent.length; i++)     \t\ttabcontent[i].style.display = \"none\";     });</script>"
+         },
+         {
+            "name": "ISUEmployeeSelfService_JS_Functions1",
+            "type": "literal",
+            "value": "<script>\n/*\n$(document).ready(function() {   //same as: $(function() { \n     console.log(\"Running mustRunLast() script\")});\n\nfunction mustRunLast () {\n    // your \"must run after everything else\" code here\n\n\n$(document).ready(function() {\n     console.log(\"hi 2\");\n     var now2= new Date().toString();\n     console.log(now2);\n     var myVal = $('#pbid-ISUEmployeeSelfService_User_Val2').val();\n     console.log(myVal + \" <--\");\n    // console.log(\"Valid? \" + global_ISUemployee);\n    //console.log(\"Literal Loaded!  \"+ global_ISUemployee.'USER_VAL' + \" ....thats the value\");\n\n    var OITTabs = document.getElementById(\"pbid-TabLinks_OIT-container\");\n    var RegistrarTabs = document.getElementById(\"pbid-TabLinks_Registrar-container\");\n\n\n    if(myVal === 'Y') {  \n        console.log(myVal);\n       OITTabs.style.display = \"block\"; \n       console.log(\"User Validation Approved!\");\n    } else {\n       \n        console.log(myVal);\n       OITTabs.style.display = \"none\";\n       console.log(\"Validation Not Approved!\");\n       alert( \"You Are Not Authorized to View Certain Elements on this page\");\n   }\n\n     //registrar webtailor reoles allowed to view tab\n})\n};\n\ndocument.addEventListener('load', function(){\n    // adjust the delay as you like, 500 millis is a bit long\n    setTimeout(mustRunLast, 300)\n})\n*/\n\n</script>"
+         }
+      ],
+      "name": "ISUEmployeeSelfService",
+      "pageURL": "#",
+      "type": "page",
+      "title": "Employee Self-Service",
+      "importCSS": "StudentSelfService"
+   },
+   "owner": "JCANNON20",
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMA",
+         "allow": true
+      },
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      },
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      }
+   ]
+}

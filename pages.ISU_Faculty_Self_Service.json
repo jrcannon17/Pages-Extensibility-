@@ -1,0 +1,587 @@
+{
+   "constantName": "ISU_Faculty_Self_Service",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2023-11-17T20:36:29Z",
+   "modelView": {
+      "components": [
+         {
+            "name": "ISUFacultySelfService_InitializationScript",
+            "type": "literal",
+            "value": "<script>\nwindow.addEventListener('load', function() {\nvar i, tabcontent;\t\t\ntabcontent = document.getElementsByClassName(\"tabcontent\");\t\n\nfor (i = 1; i < tabcontent.length; i++)\n     \t\ttabcontent[i].style.display = \"none\";\n     });\n\n</script>"
+         },
+         {
+            "components": [
+               {
+                  "name": "TabLinks_Logic",
+                  "type": "literal",
+                  "value": "<script>function selectPage(page) {\tvar i, tabcontent;\t\ttabcontent = document.getElementsByClassName(\"tabcontent\");\tfor (i = 0; i < tabcontent.length; i++) {         \t\tif (i==page)\t\t\ttabcontent[i].style.display = \"block\"; \t\telse\t\t\ttabcontent[i].style.display = \"none\";     \t}\t}</script>"
+               },
+               {
+                  "onClick": "selectPage(0);",
+                  "name": "TabLinks_AdvisorServices",
+                  "style": "tablinks",
+                  "label": "Advisor Services",
+                  "type": "button"
+               },
+               {
+                  "valueStyle": "",
+                  "onClick": "selectPage(1);",
+                  "name": "TabLinks_FacultyServices",
+                  "style": "tablinks",
+                  "label": "Faculty Services",
+                  "type": "button"
+               },
+               {
+                  "onClick": "selectPage(2);",
+                  "name": "TabLinks_ReportingServices",
+                  "style": "tablinks",
+                  "label": "Reporting Services",
+                  "type": "button"
+               },
+               {
+                  "onClick": "selectPage(3);",
+                  "name": "TabLinks_Miscellaneous",
+                  "style": "tablinks",
+                  "label": "Additional Services",
+                  "type": "button"
+               }
+            ],
+            "name": "TabLinks",
+            "style": "tab",
+            "showInitially": true,
+            "label": "&nbsp;Faculty Self-Service",
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "name": "ISUFacultySelfService_Boundary1",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_AdviseListing",
+                        "description": "Advisee Listing",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/saml/login?relayState=/c/auth/SSB?pkg=bwlkadvr.P_DispAdvisees"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_CurriculumPetition",
+                        "description": "Curriculum Petition (College of Arts and Science's Use Only)",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://indstate.qualtrics.com/SE/?SID=SV_7PPmu8hZjYaz8Ta"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_DegreeAuditToolsMySAM",
+                        "description": "Degree Audit Tools-MySAM",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-degreeworks.indstate.edu/rspdashboard/plans"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_ProbationDeansOptionMaxHoursOverride",
+                        "description": "Probation Deans Option / Max Hours Override",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/saml/login?relayState=/c/auth/SSB?pkg=bwzkmhrs.P_Override"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_Registration_History",
+                        "description": "Registration History",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devlinteract.indstate.edu/pls/devl/bwlkhreg.p_fac_reg_hist"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_ScheduleofClasses",
+                        "description": "Schedule of Classes",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/saml/login?relayState=/c/auth/SSB?pkg=bwckschd.p_disp_dyn_sched"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_StudentSearchforAdvisors",
+                        "description": "Student Search for Advisors",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/StudentSelfService/ssb/termSelection"
+                     }
+                  ],
+                  "name": "ISUFacultySelfService_Advisor_Services",
+                  "showInitially": true,
+                  "label": "Advisor Services",
+                  "type": "block"
+               }
+            ],
+            "name": "AdvisorServices",
+            "showInitially": true,
+            "style": "tabcontent",
+            "label": "",
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "name": "FacultyServices_Boundary2",
+                        "type": "literal",
+                        "value": "<hr />"
+                     }
+                  ],
+                  "name": "FacultyServices_FacultyServices",
+                  "showInitially": true,
+                  "label": "Faculty Services",
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "name": "ISUFacultySelfService_Boundary3",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_Canvas_Request_Course_Site",
+                        "description": "Canvas - Activate a Content Site",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://indstate.teamdynamix.com/TDClient/1851/Portal/Requests/ServiceDet?ID=50585"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_DeleteACourseSite",
+                        "description": "Delete a Course Site",
+                        "style": "hidden",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://indstate.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19150"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_ReportIssue",
+                        "description": "Report an Issue",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://indstate.teamdynamix.com/TDClient/1851/Portal/Requests/ServiceDet?ID=50317"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_RequestLoginIDsForNonISUUsers",
+                        "description": "Request Login IDs for non-ISU Users",
+                        "style": "hidden",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://indstate.teamdynamix.com/TDClient/Requests/ServiceDet?ID=19683"
+                     }
+                  ],
+                  "name": "ISUFacultySelfService_Blackboard",
+                  "showInitially": true,
+                  "label": "Canvas",
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "name": "ISUFacultySelfService_Boundary4",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_Assignments",
+                        "description": "Assignments",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/FacultySelfService/ssb/assignments#!/home/active"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_ClassList",
+                        "description": "Class List",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/StudentSelfService/ssb/classListApp/classListPage#!/"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_CourseRosterCourse_Catalog",
+                        "description": "Course Catalog",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devlinteract.indstate.edu/pls/devl/bwlkffcs.p_disp_dyn_ctlg"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_DetailSchedule",
+                        "description": "Detail Schedule",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/FacultySelfService/ssb/facultyDetailSchedule#!/:selectedTerm"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_InformationOnly",
+                        "description": "Information Only",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/saml/login?relayState=/c/auth/SSB?pkg=bwlkfcwl.P_FacClaListSum"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_Office_Hours",
+                        "description": "Office Hours",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": true,
+                        "url": "https://devl-bansvc.indstate.edu/FacultySelfService/ssb/officeHours#!/:selectedTerm"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_Syllabus_Info",
+                        "description": "Syllabus Information",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/FacultySelfService/ssb/syllabus#!/:selectedTerm"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_WeekAtAGlance",
+                        "description": "Week at a Glance",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/FacultySelfService/ssb/facultyWeekAtAGlance#!/"
+                     }
+                  ],
+                  "name": "ISUFacultySelfService_CourseRoster",
+                  "showInitially": true,
+                  "label": "Course Roster",
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "name": "ISUFacultySelfService_Boundary99",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_CenterforStudentSuccess",
+                        "description": "Center for Student Success",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "http://www.indstate.edu/cfss/"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_College_of_Education_Menu_Background_Check",
+                        "description": "College of Education Menu/Background Check",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/BannerExtensibility/customPage/page/ISU_BCOE_BackgroundCheck"
+                     },
+                     {
+                        "name": "Miscellaneous_Curriculog_User_Guide",
+                        "description": "Curriculog User Guide",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": true,
+                        "url": "https://sycamoresindstate-my.sharepoint.com/:b:/r/personal/elizabeth_tomlinson_indstate_edu/Documents/Curriculog_Academic%20Notes/Curriculog%20User%20Guide%20(1).pdf?csf=1&web=1&e=RcV9jZ"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_FacultyActivityDatabaseInformation",
+                        "description": "(FAD) Faculty Activity Database Information",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://www.digitalmeasures.com/login/indstate/faculty/"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_Miscellaneous_Internet_Course_Delivery_Designation",
+                        "description": "Internet Course Delivery Designation<br>\n(State/Update the method of Internet Delivery of your courses)",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": true,
+                        "url": "https://devlinteract.indstate.edu/pls/devl/hwzkingr.P_FacDistanceDelivery"
+                     },
+                     {
+                        "name": "ISUFacultySelfService_UniversityHandbook",
+                        "description": "University Handbook",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "http://www.indstate.edu/adminaff/policyindex.htm"
+                     }
+                  ],
+                  "name": "ISUFacultySelfService_Miscellaneous",
+                  "showInitially": true,
+                  "label": "Miscellaneous",
+                  "type": "block"
+               }
+            ],
+            "name": "FacultyServices",
+            "style": "tabcontent",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "name": "ReportingServices_child_4_child_1",
+                        "type": "literal",
+                        "value": "<hr />"
+                     }
+                  ],
+                  "name": "ReportingServices_child_4",
+                  "showInitially": true,
+                  "label": "Reporting Services",
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "name": "ReportingServices_Boundary5",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "ReportingServices_ChangeofGrade",
+                        "description": "Change of Grade",
+                        "style": "",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/saml/login?relayState=/c/auth/SSB?pkg=bwzkcog.P_Main"
+                     },
+                     {
+                        "name": "ReportingServices_FinalGrades",
+                        "description": "Final Grades",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/FacultySelfService/ssb/GradeEntry#/final"
+                     },
+                     {
+                        "name": "ReportingServices_GradeDistribution",
+                        "description": "Grade Distribution (Must be on campus)",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://argos.indstate.edu/argos/argos_dashboard_launch.html?report=V5UDAST6UIYCZU5YMWRV3VI4QI3ST4SMZBRZZ64SSJXQ363NFC67T5SJ4AR5Y6E64CMGBANCEXM64&AutoLogOn"
+                     },
+                     {
+                        "name": "ReportingServices_InterimGrading",
+                        "description": "Interim Grading",
+                        "style": "hidden",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/FacultySelfService/ssb/GradeEntry#/midterm"
+                     },
+                     {
+                        "name": "ReportingServices_IncompleteInProgress",
+                        "description": "Incomplete/In Progress",
+                        "style": "",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/saml/login?relayState=/c/auth/SSB?pkg=hwzkingr.P_FacCheckIncGrades"
+                     },
+                     {
+                        "name": "ReportingServices_Student_PINS",
+                        "description": "Student Pins (Must be on Campus)",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://argos.indstate.edu/argos/argos_dashboard_launch.html?report=KNWSAC4ZJQONXLHXQK2NXJT5RMBAQNDTTI5UHT4BXGWDRR5O2KJHBXKJVLUZIDVK7J5BW4TG5D3WQ&AutoLogOn"
+                     }
+                  ],
+                  "name": "ReportingServices_Grades",
+                  "showInitially": true,
+                  "label": "Grades",
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "name": "ReportingServices_Boundary6",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "ReportingServices_AttendanceReporting",
+                        "description": "Attendance Reporting",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/saml/login?relayState=/c/auth/SSB?pkg=hwzkingr.P_FacCheckAttendance"
+                     },
+                     {
+                        "name": "ReportingServices_BookOrder",
+                        "description": "Book Order Site thru Barnes & Noble University Bookstore",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "http://indiana-state.bncollege.com/webapp/wcs/stores/servlet/FacultySplashLoginView?storeId=20053&catalogId=10001&langId=-1&langId=-1&postLogonURL=BNCBFacultyAdoptionEmail&previouspage=faculty"
+                     }
+                  ],
+                  "name": "ReportingServices_Miscellaneous",
+                  "showInitially": true,
+                  "label": "Miscellaneous",
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "name": "ReportingServices_Boundary7",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "ReportingServices_AcademicIntegrityViolation",
+                        "description": "Academic Integrity Violation",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://publicdocs.maxient.com/reportingform.php?IndianaStateUniv&layout_id=2"
+                     },
+                     {
+                        "name": "ReportingServices_ClassroomConduct",
+                        "description": "Classroom Conduct",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "http://www.indstate.edu/sci/index.htm"
+                     }
+                  ],
+                  "name": "ReportingServices_StudentJudicialReporting",
+                  "showInitially": true,
+                  "label": "Student Judicial Reporting",
+                  "type": "block"
+               }
+            ],
+            "name": "ReportingServices",
+            "style": "tabcontent",
+            "showInitially": true,
+            "label": "",
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "name": "Miscellaneous_Boundary8",
+                        "type": "literal",
+                        "value": "<hr />"
+                     },
+                     {
+                        "name": "Miscellaneous_CurriculogInstructionsforApprovingFeeProposals",
+                        "description": "Curriculog Instructions for Approving Fee Proposals",
+                        "style": "hidden",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://isuportal.indstate.edu/secure/Curriculog-Approving-Special-Course-Fee-Proposals.pdf"
+                     },
+                     {
+                        "name": "Miscellaneous_CurriculogInstructionsforSubmittingFeeProposals",
+                        "description": "Curriculog Instructions for Submitting Fee Proposals",
+                        "style": "hidden",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://isuportal.indstate.edu/secure/Curriculog-Instructions-for-Submitting-Special-Course-Fee-Proposals.pdf"
+                     },
+                     {
+                        "name": "Miscellaneous_CurriculogUserGuide",
+                        "description": "Curriculog User Guide",
+                        "style": "hidden",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://isuportal.indstate.edu/secure/CurriculogUserGuide.pdf"
+                     },
+                     {
+                        "name": "Miscellaneous_ISUEvents",
+                        "description": "ISU Events (mobile/tablet friendly)",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://cms.indstate.edu/all-events-portal/Faculty"
+                     },
+                     {
+                        "name": "Miscellaneous_My_Profile",
+                        "description": "My Profile - Update Address, Phone, Email, Emergency Contact Information",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-bansvc.indstate.edu/BannerGeneralSsb/ssb/general#/home"
+                     },
+                     {
+                        "name": "Miscellaneous_RAVEAlert",
+                        "description": "RAVE Alert (Emergency Notification)",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://www.getrave.com/login/indstate"
+                     },
+                     {
+                        "name": "Miscellaneous_SelfServiceMenu",
+                        "description": "Self-Service Menu",
+                        "label": "&nbsp;&nbsp;&nbsp;&nbsp;",
+                        "type": "link",
+                        "replaceView": false,
+                        "url": "https://devl-beis-sso.indstate.edu/ssomanager/c/SSB?pkg=twbkwbis.P_GenMenu?name=bmenu.P_FacMnu"
+                     }
+                  ],
+                  "name": "Miscellaneous_Miscellaneous",
+                  "showInitially": true,
+                  "label": "Miscellaneous",
+                  "type": "block"
+               }
+            ],
+            "name": "Miscellaneous",
+            "style": "tabcontent",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "name": "ISUFacultySelfService",
+      "style": "",
+      "pageURL": "#",
+      "type": "page",
+      "title": "Faculty Self-Service",
+      "importCSS": "StudentSelfService"
+   },
+   "owner": "MLECHNER",
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMA",
+         "allow": true
+      },
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      },
+      {
+         "roleName": "FACULTY",
+         "allow": true
+      }
+   ]
+}

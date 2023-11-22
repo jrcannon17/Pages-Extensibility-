@@ -1,0 +1,545 @@
+{
+   "constantName": "ISU_Help_Manager_Page",
+   "developerSecurity": [],
+   "extendsPage": null,
+   "fileTimestamp": "2023-06-05T17:48:46Z",
+   "modelView": {
+      "components": [
+         {
+            "documentation": "On load, the 'before click' tab should be the only thing displayed. Once an 'On Click' action has been performed, then regardless if the ID is valid, the 'after click' tab should be displayed. Even though it's not technically a tab, this is what we will call it for now.",
+            "name": "Page_Listener",
+            "type": "literal",
+            "value": "<script>\n\nwindow.addEventListener('load', function() {\nvar i, tabcontent;\t\t\ntabcontent = document.getElementsByClassName(\"tabcontent\");\t\n\nfor (i = 1; i < tabcontent.length; i++)     \t\t\ntabcontent[i].style.display = \"none\";     \n});\n</script>"
+         },
+         {
+            "resource": "virtualDomains.ISU_Help_Desk_Manager",
+            "name": "idLookup",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "resource": "virtualDomains.ISU_HELP_DESK_ACCOUNTS",
+            "name": "ISU_Account_table",
+            "type": "resource",
+            "staticData": []
+         },
+         {
+            "components": [
+               {
+                  "components": [
+                     {
+                        "name": "Instructions",
+                        "type": "literal",
+                        "value": "<p>\nEnter the Banner ID (991 number) for the person. \n</p>"
+                     }
+                  ],
+                  "name": "Before_Click",
+                  "showInitially": true,
+                  "style": "tabcontent",
+                  "type": "block"
+               },
+               {
+                  "components": [
+                     {
+                        "name": "After_Click_Message",
+                        "type": "literal",
+                        "value": "<p>The following information will be used to authenticate the user to the Help Desk. Please verify that it is accurate.</p><br><p>When you click the button below a new window will open, the user will be verified, and all information will be updated in the Parature system. You can continue to enter the ticket for the person by clicking the \"Submit a Ticket\" link, or you can now use Parature to pull the person's information up, and submit the ticket through the normal Parature interface.</p>"
+                     }
+                  ],
+                  "name": "After_Click",
+                  "showInitially": false,
+                  "style": "tabcontent",
+                  "type": "block"
+               }
+            ],
+            "name": "Header",
+            "showInitially": true,
+            "label": "Help Desk Manager - User Pass-Thru",
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "readonly": false,
+                  "documentation": "ID_Text_Field",
+                  "name": "ID_Text_Field",
+                  "label": "Search by University ID/Username:",
+                  "loadInitially": false,
+                  "type": "text",
+                  "parameters": {},
+                  "validation": {},
+                  "required": true
+               },
+               {
+                  "onClick": "console.log(\"On Update for userID1\"); \n$id_Lookup = $ID_Text_Field;\n//console.log(\"Before load:  \"+$id_Lookup + \":\"+$dataLookup); $dataLookup.$load({clearCache:true},true);\n$dataLookup.$load();\n//$Accounts.$load({clearCache:true},true);\n//$Accounts.$load();\n//hide subsequent block until ID entered is valid",
+                  "name": "Submit",
+                  "label": "Submit",
+                  "type": "button"
+               },
+               {
+                  "components": [
+                     {
+                        "onClick": "nadawada",
+                        "name": "TDX",
+                        "label": "TDX",
+                        "type": "button"
+                     },
+                     {
+                        "onClick": "nada",
+                        "name": "DIRXMIL",
+                        "label": "DIRXMIL Event",
+                        "type": "button"
+                     },
+                     {
+                        "components": [
+                           {
+                              "readonly": false,
+                              "name": "Role",
+                              "label": "Role:",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "University_ID",
+                              "loadInitially": false,
+                              "label": "University ID:",
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "Username",
+                              "label": "Username",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "ID_CARD_Number",
+                              "loadInitially": false,
+                              "label": "Card Number:",
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "Full_Name",
+                              "loadInitially": false,
+                              "label": "Full Name:",
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "Work_Start_Date",
+                              "loadInitially": false,
+                              "label": "Work Start:",
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "Birthdate",
+                              "loadInitially": false,
+                              "label": "Birthdate:",
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "Social",
+                              "loadInitially": false,
+                              "label": "SSN:",
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           }
+                        ],
+                        "name": "ID_Card_Block",
+                        "showInitially": false,
+                        "label": "Sycamore ID Card",
+                        "type": "block"
+                     },
+                     {
+                        "components": [
+                           {
+                              "readonly": false,
+                              "name": "P_Roles",
+                              "label": "Provision Roles",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "I_Roles",
+                              "label": "Institutional Roles:",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "FERPA",
+                              "model": "",
+                              "label": "FERPA Acknowledgement is currently signed",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "Last_Term",
+                              "label": "Last Term Registered:",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "Last_Login_Result",
+                              "onLoad": "",
+                              "model": "",
+                              "label": "Last Self Service login for:",
+                              "loadInitially": false,
+                              "type": "datetime",
+                              "value": "",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           }
+                        ],
+                        "name": "Roles_Block",
+                        "showInitially": false,
+                        "label": "Roles",
+                        "type": "block"
+                     },
+                     {
+                        "components": [
+                           {
+                              "allowDelete": false,
+                              "components": [
+                                 {
+                                    "asHtml": false,
+                                    "name": "Campus_Phone",
+                                    "loadInitially": false,
+                                    "type": "display"
+                                 },
+                                 {
+                                    "asHtml": false,
+                                    "name": "Campus_email_staff",
+                                    "loadInitially": false,
+                                    "type": "display"
+                                 },
+                                 {
+                                    "asHtml": false,
+                                    "name": "Campus_email_student",
+                                    "loadInitially": false,
+                                    "type": "display"
+                                 },
+                                 {
+                                    "asHtml": false,
+                                    "name": "Campus_address",
+                                    "loadInitially": false,
+                                    "type": "display"
+                                 },
+                                 {
+                                    "asHtml": false,
+                                    "name": "Campus_date",
+                                    "loadInitially": false,
+                                    "type": "display"
+                                 }
+                              ],
+                              "allowNew": false,
+                              "name": "Campus",
+                              "allowModify": false,
+                              "pageSize": 5,
+                              "model": "dataLookup",
+                              "label": "CA",
+                              "loadInitially": false,
+                              "allowReload": false,
+                              "type": "grid",
+                              "parameters": {}
+                           },
+                           {
+                              "allowDelete": false,
+                              "components": [
+                                 {
+                                    "asHtml": false,
+                                    "name": "Personal_phone",
+                                    "loadInitially": false,
+                                    "type": "display"
+                                 },
+                                 {
+                                    "asHtml": false,
+                                    "name": "Personal_email",
+                                    "loadInitially": false,
+                                    "type": "display"
+                                 },
+                                 {
+                                    "asHtml": false,
+                                    "name": "Personal_email_staff",
+                                    "loadInitially": false,
+                                    "type": "display"
+                                 },
+                                 {
+                                    "asHtml": false,
+                                    "name": "Personal_address",
+                                    "loadInitially": false,
+                                    "type": "display"
+                                 },
+                                 {
+                                    "asHtml": false,
+                                    "name": "Personal_date",
+                                    "loadInitially": false,
+                                    "type": "display"
+                                 }
+                              ],
+                              "allowNew": false,
+                              "name": "Personal",
+                              "allowModify": false,
+                              "pageSize": 5,
+                              "model": "dataLookup",
+                              "label": "PER",
+                              "loadInitially": false,
+                              "allowReload": false,
+                              "type": "grid",
+                              "parameters": {}
+                           }
+                        ],
+                        "name": "Address_Block",
+                        "showInitially": false,
+                        "label": "Address",
+                        "type": "block"
+                     },
+                     {
+                        "components": [
+                           {
+                              "readonly": false,
+                              "name": "Username1",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "components": [],
+                              "readonly": false,
+                              "name": "Accounts",
+                              "label": "List of Available Accounts",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           }
+                        ],
+                        "name": "Accounts_Block",
+                        "showInitially": false,
+                        "label": "ISU Account Information",
+                        "type": "block"
+                     },
+                     {
+                        "components": [
+                           {
+                              "readonly": false,
+                              "name": "Advisor",
+                              "label": "Advisor Name:",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "Term",
+                              "label": "Term:",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "CRN",
+                              "label": "CRN:",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "Subject",
+                              "label": "Subject:",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "Course_Number",
+                              "label": "Number:",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           },
+                           {
+                              "readonly": false,
+                              "name": "Section",
+                              "label": "Section:",
+                              "loadInitially": false,
+                              "type": "text",
+                              "parameters": {},
+                              "validation": {},
+                              "required": false
+                           }
+                        ],
+                        "name": "Courses_Block",
+                        "showInitially": false,
+                        "label": "Course Information",
+                        "type": "block"
+                     },
+                     {
+                        "components": [
+                           {
+                              "allowDelete": false,
+                              "allowNew": false,
+                              "name": "Current_Student",
+                              "allowModify": false,
+                              "pageSize": 5,
+                              "model": "idLookup",
+                              "label": "Current Student Information",
+                              "allowReload": false,
+                              "loadInitially": false,
+                              "type": "grid",
+                              "parameters": {}
+                           },
+                           {
+                              "allowDelete": false,
+                              "allowNew": false,
+                              "name": "Registration",
+                              "allowModify": false,
+                              "pageSize": 5,
+                              "model": "idLookup",
+                              "label": "Registration Information",
+                              "allowReload": false,
+                              "loadInitially": false,
+                              "type": "grid",
+                              "parameters": {}
+                           },
+                           {
+                              "allowDelete": false,
+                              "allowNew": false,
+                              "name": "Registration_Con",
+                              "allowModify": false,
+                              "pageSize": 5,
+                              "model": "idLookup",
+                              "allowReload": false,
+                              "loadInitially": false,
+                              "type": "grid",
+                              "parameters": {}
+                           }
+                        ],
+                        "name": "Admission_Block",
+                        "showInitially": false,
+                        "label": "Admission and Registration",
+                        "type": "block"
+                     }
+                  ],
+                  "name": "Results_Block",
+                  "showInitially": true,
+                  "type": "block"
+               },
+               {
+                  "onError": "if( typeof $dataLookup == 'undefined'){\n\nalert(\"Something went wrong\", {type:\"error\", flash:true}); \n}",
+                  "name": "dataLookup",
+                  "pageSize": 5,
+                  "onLoad": "console.log(\"+++++ Data1: On Load\"); \nif( typeof $dataLookup !== 'undefined'){  console.log(\"Data: \" + $dataLookup.FULL_NAME, $dataLookup.UNIV_USERNAME, $dataLookup.UNIV_ID, $dataLookup.LEGAL_NAME, $dataLookup.CHOSEN_NAME, $dataLookup.IROLES, $dataLookup.PIDM, $dataLookup.CARD_ROLE, $dataLookup.CARD_STATUS, $dataLookup.ISO, $dataLookup.PROLES, $dataLookup.IND, $dataLookup.HIRE_DATE);\n\n//Date($dataLookup.Last_Login)\n\n/*\ntry {\n$Last_Login_Result = Date($dataLookup.Last_Login);\n}\ncatch (e)   {\nconsole.error(e);\n}\n*/\n\n//ID_Card_Block\n\n//$ResultBlock.$visible = true; \n$Role= $dataLookup.CARD_ROLE;\n$ID_Card_Number = $dataLookup.ISO ?? 'N/A';\n//$UserStatus = $dataLookup.CARD_STATUS;\n$Full_Name = $dataLookup.FULL_NAME;\n$Work_Start_Date = $dataLookup.HIRE_DATE;\n//have work end date where appicable \n//dataLookup.HIRE_END_DATE;\n$Birthdate = $dataLookup.BDAY;\n$Social = $dataLookup.SSN;\n//$Chosen_Name = $dataLookup.CHOSEN_NAME ?? 'N/A';\n$Username = $dataLookup.UNIV_USERNAME;\n$University_ID = $dataLookup.UNIV_ID;\n\n//Roles_Block\n\n$I_Roles = $dataLookup.IROLES //.replace(/\\s+/g,' ').trim();\n$P_Roles = $dataLookup.PROLES;\n$Last_Term = $dataLookup.LAST_TERM_REGISTER;\n\n//Address_Block\n$Campus_address = $dataLookup.STAFF_ADDRESS;\n$Campus_email_staff = $dataLookup.ISU_STAFF_EMAIL;\n$Campus_email_student = $dataLookup.ISU_EMAIL;\n$Campus_Phone = $dataLookup.HOME;\n//$Campus_date = $dataLookup\n$Personal_phone = $dataLookup.CELL_PHONE;\n$Personal_email = $dataLookup.PERSONAL_EMAIL;\n$Personal_email_staff = $dataLookup.PER_STAFF_EMAIL;\n\n//Accounts_Block\n$Username1 = $dataLookup.uid_user_id;",
+                  "model": "idLookup",
+                  "loadInitially": false,
+                  "type": "data",
+                  "parameters": {
+                     "id_param": "$id_Lookup"
+                  }
+               }
+            ],
+            "name": "Body",
+            "showInitially": true,
+            "type": "block"
+         },
+         {
+            "components": [
+               {
+                  "name": "Footer_Info",
+                  "type": "literal",
+                  "value": "<hr>\n<p>\nRELEASE: 5.5/1\n</p>\n<br>\n<p><b>\n2023 Ellucian Company L.P. and its affiliates. </p>"
+               }
+            ],
+            "name": "Footer",
+            "showInitially": true,
+            "type": "block"
+         }
+      ],
+      "name": "ISUHelpManagerPage",
+      "style": "ISU_EmployeeStudentSearch",
+      "type": "page"
+   },
+   "owner": "JCANNON20",
+   "pageRoles": [
+      {
+         "roleName": "ADMIN-GPBADMA",
+         "allow": true
+      },
+      {
+         "roleName": "ADMIN-GPBADMN",
+         "allow": true
+      },
+      {
+         "roleName": "ALLROLES",
+         "allow": true
+      },
+      {
+         "roleName": "HELP",
+         "allow": true
+      },
+      {
+         "roleName": "HELPMGR",
+         "allow": true
+      }
+   ]
+}

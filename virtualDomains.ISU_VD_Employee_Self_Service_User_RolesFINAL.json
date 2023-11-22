@@ -1,0 +1,34 @@
+{
+   "owner": "JCANNON20",
+   "codePut": null,
+   "codeDelete": null,
+   "virtualDomainRoles": [
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMA",
+         "allowGet": true
+      },
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ADMIN-GPBADMN",
+         "allowGet": true
+      },
+      {
+         "allowDelete": false,
+         "allowPost": false,
+         "allowPut": false,
+         "roleName": "ALLROLES",
+         "allowGet": true
+      }
+   ],
+   "codeGet": "select NVL((SELECT DISTINCT 'Y' from wtailor.twgrrole\r\nwhere twgrrole_pidm =  :parm_user_pidm\r\nand twgrrole_role IN ('CLASSLISTADMINISTRATOR', 'PROXYMGMT', 'REGISTRAR', 'QVIEW-ORR', 'QVIEW-ORR-MGR','ATTR_ADMIN', 'CGPSADMIN')), 'N') USER_VAL FROM DUAL\r\n",
+   "typeOfCode": "S",
+   "fileTimestamp": null,
+   "serviceName": "ISU_VD_Employee_Self_Service_User_Roles",
+   "codePost": null,
+   "developerSecurity": []
+}

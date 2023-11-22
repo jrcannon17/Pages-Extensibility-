@@ -1,0 +1,1235 @@
+{
+    "components": [
+          {
+                "documentation": "On load, the 'before click' tab should be the only thing displayed. Once an 'On Click' action has been performed, then regardless if the ID is valid, the 'after click' tab should be displayed. Even though it's not technically a tab, this is what we will call it for now.\n\nborder-right: 1px solid black;",
+                "name": "Page_Listener",
+                "type": "literal",
+                "value": "<script>\n\nwindow.addEventListener('load', function() {\nvar i, tabcontent;\t\t\ntabcontent = document.getElementsByClassName(\"tabcontent\");\t\n\nfor (i = 1; i < tabcontent.length; i++)     \t\t\ntabcontent[i].style.display = \"none\";     \n});\n</script>\n\n<style>\n#pbid-Current_Courses_Taken-label{ \ntext-align:center;}\nh2,h4, h5{\ntext-align:center;\n}\n#pbid-TDX_DIRXML_Option{\n    display: flex;  \n    flex-direction: row;\n}\n\n#pbid-TDX-container{\n\npadding-right: 20px;\n\n}\n\n#pbid-First_Row_Block{\n  display: flex;  \n  flex-direction: row;\n}\n#pbid-ID_Card_Block {\npadding-left: 5px;\npadding-right: 20px;\n    width: 600px;\nborder-right: 1px solid black;\n}\n#pbid-ID_Card_Block-label{\ntext-decoration: underline;\n}\n#pbid-Roles_Block {\npadding-left: 5px;\n    width: 750px;\ntext-decoration: underline;\nmargin-left: 20px;\n}\n/*\n#pbid-Roles_Block-label{\ntext-decoration: underline;\n\n}\n*/\n#pbid-Account_User_Name{\noutline: none;\ntext-decoration: underline;\n\n}\n#pbid-Accounts_Block{\nborder-top: 2px solid black; \n}\n#pbid-Accounts_Block-label{\ntext-decoration: underline;\n}\n#pbid-Address_Block{\nborder-top: 2px solid black; \n}\n#pbid-Address_Block-label{\ntext-decoration: underline;\n}\n#pbid-Courses_Block{\nborder-top: 2px solid black; \ntext-decoration: underline;\n}\n#pbid-Courses_Block-label{\ntext-decoration: underline;\n}\n#pbid-Student_Block{\nborder-top: 2px solid black; \n}\n#pbid-Student_Block-label{\ntext-decoration: underline;\n}\n#pbid-Registration_Block{\nborder-top: 2px solid black; \n}\n#pbid-Registration_Block-label{\ntext-decoration: underline;\n}\n#pbid-Undergrad_Admission_Block{\nborder-top: 2px solid black; \ntext-decoration: underline;\n}\n#pbid-Grad_Admission_Block{\nborder-top: 2px solid black; \ntext-decoration: underline;\n}\n\n#pbid-Last_Login_Result{\nwidth: 400px;\n}\n#pbid-P_Roles{\nwidth: 400px;\n}\n#pbid-I_Roles{\nwidth: 400px;\n}\n/*\n#pbid-FERPA_Dates{\nborder: none;\n\n}\n#pbid-FERPA{\nborder: none;\n\n}\n*/\n#pbid-Accounts_Available-label{\nfont-weight: bold;\n      font-size: 14px;\ntext-align:center;\n}\n#pbid-U_Current_Student_Information-label{\nfont-weight: bold;\n      font-size: 16px;\ntext-align:center;\n\n}\n#pbid-G_Current_Student_Information-label{\nfont-weight: bold;\n      font-size: 16px;\ntext-align:center;\n}\n\n#pbid-Registration_Status-label{\nfont-weight: bold;\n      font-size: 16px;\ntext-align:center;\n}\n\n#pbid-Registration_Enrollment-label, #pbid-Current_Courses_Teaching-label{\nfont-weight: bold;\n      font-size: 16px;\ntext-align:center;\n}\n</style>"
+          },
+          {
+                "resource": "virtualDomains.ISU_Help_Desk_Manager",
+                "name": "idLookup",
+                "type": "resource",
+                "staticData": []
+          },
+          {
+                "name": "Loading",
+                "type": "literal",
+                "value": "<div id=\"overlay\">\n<div class=\"cv-spinner\">      \n<span class=\"spinner\"></span>\n\n</div>\n </div>"
+          },
+          {
+                "resource": "virtualDomains.ISU_HELP_DESK_ACCOUNTS",
+                "name": "ISU_Help_Desk_Accounts",
+                "type": "resource",
+                "staticData": []
+          },
+          {
+                "resource": "virtualDomains.HELP_DESK_FERPA",
+                "name": "FERPA_ACK",
+                "type": "resource",
+                "staticData": []
+          },
+          {
+                "resource": "virtualDomains.HELP_DESK_SARADAP_LEVL_CODE",
+                "name": "HELP_DESK_SARADAP_LEVL_CODE",
+                "type": "resource",
+                "staticData": []
+          },
+          {
+                "components": [
+                      {
+                            "components": [
+                                  {
+                                        "name": "Instructions",
+                                        "type": "literal",
+                                        "value": "<p>\nEnter the Banner ID (991 number) for the person. \n</p>"
+                                  }
+                            ],
+                            "name": "Before_Click",
+                            "showInitially": true,
+                            "style": "",
+                            "type": "block"
+                      },
+                      {
+                            "components": [
+                                  {
+                                        "name": "After_Click_Message",
+                                        "type": "literal",
+                                        "value": "<p>The following information will be used to authenticate the user to the Help Desk. Please verify that it is accurate.</p><br><p>When you click the button below a new window will open, the user will be verified, and all information will be updated in the Parature system. You can continue to enter the ticket for the person by clicking the \"Submit a Ticket\" link, or you can now use Parature to pull the person's information up, and submit the ticket through the normal Parature interface.</p>"
+                                  }
+                            ],
+                            "name": "After_Click",
+                            "showInitially": false,
+                            "style": "",
+                            "type": "block"
+                      }
+                ],
+                "name": "Header",
+                "showInitially": true,
+                "style": "text-align: center;",
+                "label": "Help Desk Manager - User Pass-Thru",
+                "type": "block"
+          },
+          {
+                "components": [
+                      {
+                            "readonly": false,
+                            "documentation": "ID_Text_Field",
+                            "name": "ID_Text_Field",
+                            "onLoad": "alert(response.data.errors.errorMessage, {type:\"error\"});",
+                            "label": "Search by University ID/Username:",
+                            "loadInitially": false,
+                            "type": "text",
+                            "parameters": {},
+                            "validation": {},
+                            "required": true
+                      },
+                      {
+                            "onClick": "/*======RESET THEN LOAD (TRY AJAX IN THE FUTURE)=======*/\n\n/*\n$('body').on('click',function() {\ndocument.getElementById(\"#pbid-Address_Block\").reset();\n$pbid-Address_Block.visible = false;\n\ndocument.getElementById(\"pbid-Courses_Block\").reset();\n$pbid-Courses_Block.visible = false;\n\ndocument.getElementById(\"pbid-Grad_Admission_Block\").reset();\n$pbid-Grad_Admission_Block.visible = false;\n\ndocument.getElementById(\"pbid-Registration_Block\").reset();\n$pbid-Registration_Block.visible = false;\n\ndocument.getElementById(\"pbid-Undergrad_Admission_Block\").reset();\n$pbid-Undergrad_Admission_Block.visible = false;\n\n});\n*/\nconsole.log(\"On Update for userID1\"); \n//convert lookup value to parameter :id_param\n$id_Lookup = $ID_Text_Field;\n//load data components\n//console.log(\"Before load:  \"+$id_Lookup + \":\"+$dataLookup); $dataLookup.$load({clearCache:true},true);\n$dataLookup.$load();\n$Education_Level_Lookup.$load({clearCache:true},true);\n\n$Education_Level_Lookup.$load();\n/*\n==============SHOW RESULTS BLOCK====================*/\n$Results_Block.$visible = true;\n$First_Row_Block.$visible = true;\n/*$ID_Card_Block.$visible = true; \n$Roles_Block.$visible = true; \n*/\n$FERPA.$load();\n$Last_Term_Display.$load();\n$Accounts_Block.$visible = true;\n$Accounts.$load();\n$Accounts_Available.$load();\n/*===================ACCOUNTS============================*/\n\n$Accounts_Block.$visible = true;\n$Accounts.$load();\n$Accounts_Available.$load();\n\n/*================CALL ADDRESS BLOCK================================*/\n/*\n$Address_Block.$visible = true;\n//load address components\n//staff\n$Staff_Address.$load();\n//$Staff_CA.$load();\n//student\n$Student_Address.$load();\n//$Stu_CA.$load();\n//personal\n$Personal.$load();\n//$Home.$load();\n*/\n\n//call courses block and children\n/*\n\n$Courses_Block.$visible = true;\n$Faculty_Block.$visible = true;\n$Current_Courses_Teaching.$load();\n//STUDENT\n$Student_Block.$visible = true;\n$Advisor_Information.$visible = true;\n$Current_Courses_Taken.$load();\n\n*/\n//Course Verification\n/*\n$Undergrad_Admission_Block.$visible = true;\n$U_Current_Student_Information.$load();\n$Admission_Block.$visible = true;\n$Registration_Block.$visible = true;\n$Registration_Status.$load();\n\n$G_Current_Student_Information.$load();\n*/\n\n/*==================RESTART/CLEAR CONTENT WHEN NEW VALUE IS PRESSED==========*/\n\n/*\nfunction clearfield(ElementID) {\n    ElementID.value = \"\";\n};\nfunction clearcontent(elementID){\n\nvar element = document.getElementById(elementID);\nwhile(element.firstChild){\nelement.removeChild(element.firstChild);\n}\n//$PhotoBlock_Result.$visible = false;\n};\n$('body').on('click',clearcontent('#pbid-Address_Block'), function(){\n//$PhotoBlock_Result.$visible = true;\nconsole.log('content cleared');\n}\n);\n\n\n*/\n\n\n/*\ndocument.addEventListener('DOMContentLoaded', function() {\n  var searchInput = document.getElementById('pbid-ID_Text_Field');\n  var searchButton = document.getElementById('pbid-Submit');\n\n  searchButton.addEventListener('click', function() {\n    var searchValue = searchInput.value;\n    if (searchValue.trim() !== '') {\n      // Perform your AJAX request or any other operations with the search value here\n\n      // Clear input fields and refresh the page\n      clearFieldsAndRefresh();\n    }\n  });\n\n  function clearFieldsAndRefresh() {\n    searchInput.value = '';\n    window.location.reload();\n  }\n});\n*/\n//scaleTextboxWidth(\"pbid-I_Roles\");\n//scaleTextboxWidth(\"pbid-P_Roles\");",
+                            "name": "Submit",
+                            "label": "Submit",
+                            "type": "button"
+                      },
+                      {
+                            "name": "Line_Break",
+                            "type": "literal",
+                            "value": "<br>"
+                      },
+                      {
+                            "components": [
+                                  {
+                                        "components": [
+                                              {
+                                                    "onClick": "window.open(\n \"https://indstate.teamdynamix.com/TDClient/1851/Portal/Home\",\n  '_blank' // <- This is what makes it open in a new window.\n);",
+                                                    "name": "TDX",
+                                                    "label": "TDX",
+                                                    "type": "button"
+                                              },
+                                              {
+                                                    "onClick": "console.log('clicked')",
+                                                    "name": "DIRXMIL",
+                                                    "label": "DIRXMIL Event",
+                                                    "type": "button"
+                                              },
+                                              {
+                                                    "name": "TDX_line_break",
+                                                    "type": "literal",
+                                                    "value": "<br>"
+                                              }
+                                        ],
+                                        "name": "TDX_DIRXML_Option",
+                                        "showInitially": true,
+                                        "type": "block"
+                                  },
+                                  {
+                                        "name": "Line_Break1",
+                                        "type": "literal",
+                                        "value": "<br>"
+                                  },
+                                  {
+                                        "components": [
+                                              {
+                                                    "components": [
+                                                          {
+                                                                "documentation": "break line space for block",
+                                                                "name": "ID_line_break",
+                                                                "type": "literal",
+                                                                "value": "<br>"
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Role",
+                                                                "label": "Role:",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "University_ID",
+                                                                "loadInitially": false,
+                                                                "label": "University ID:",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Username",
+                                                                "label": "Username:",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "ID_CARD_Number",
+                                                                "loadInitially": false,
+                                                                "label": "Card Number:",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Full_Name",
+                                                                "loadInitially": false,
+                                                                "label": "Full Name:",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Chosen_Name",
+                                                                "label": "Chosen Name:",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Work_Start_Date",
+                                                                "loadInitially": false,
+                                                                "label": "Work Start:",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Work_End_Date",
+                                                                "style": "",
+                                                                "label": "Last Worked:",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Birthdate",
+                                                                "loadInitially": false,
+                                                                "label": "Birthdate:",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Social",
+                                                                "loadInitially": false,
+                                                                "label": "SSN:",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Affiliate_End_Date",
+                                                                "loadInitially": false,
+                                                                "label": "Aff End Date:",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Affiliate_Sponsor",
+                                                                "loadInitially": false,
+                                                                "label": "Aff Sponsor:",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": false,
+                                                                "name": "User_PIDM",
+                                                                "style": "hidden",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": false,
+                                                                "name": "Visitor_PIDM",
+                                                                "style": "hidden",
+                                                                "model": "",
+                                                                "loadInitially": true,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          }
+                                                    ],
+                                                    "name": "ID_Card_Block",
+                                                    "showInitially": false,
+                                                    "style": "<u>",
+                                                    "label": "Sycamore ID Card",
+                                                    "type": "block"
+                                              },
+                                              {
+                                                    "components": [
+                                                          {
+                                                                "documentation": "break line space for block",
+                                                                "name": "Role_line_break",
+                                                                "type": "literal",
+                                                                "value": "<br>"
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "P_Roles",
+                                                                "label": "Provision Roles:",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "documentation": "I ROLES contain student and faculty",
+                                                                "name": "I_Roles",
+                                                                "label": "Institutional Roles:",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "name": "InLine_Break2",
+                                                                "type": "literal",
+                                                                "value": "<br>"
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Department",
+                                                                "label": "Department:",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "name": "InLine_Break",
+                                                                "type": "literal",
+                                                                "value": "<br>"
+                                                          },
+                                                          {
+                                                                "allowDelete": false,
+                                                                "components": [
+                                                                      {
+                                                                            "asHtml": true,
+                                                                            "onError": "alert(response.data.errors.errorMessage, {type:\"error\"});",
+                                                                            "name": "FERPA_Dates",
+                                                                            "model": "FERPA_ACK",
+                                                                            "style": "",
+                                                                            "loadInitially": false,
+                                                                            "type": "display"
+                                                                      }
+                                                                ],
+                                                                "allowNew": false,
+                                                                "name": "FERPA",
+                                                                "allowModify": false,
+                                                                "pageSize": 5,
+                                                                "model": "FERPA_ACK",
+                                                                "allowReload": false,
+                                                                "loadInitially": false,
+                                                                "label": "FERPA Acknowledgement Signature Date",
+                                                                "type": "detail",
+                                                                "parameters": {
+                                                                      "id_param": "$id_Lookup"
+                                                                }
+                                                          },
+                                                          {
+                                                                "name": "InLine_Break1",
+                                                                "type": "literal",
+                                                                "value": "<br>"
+                                                          },
+                                                          {
+                                                                "allowDelete": false,
+                                                                "components": [
+                                                                      {
+                                                                            "asHtml": false,
+                                                                            "name": "Last_registration_term_display",
+                                                                            "model": "LAST_REG_TERM",
+                                                                            "label": "Last Term Registered:",
+                                                                            "loadInitially": false,
+                                                                            "type": "display"
+                                                                      }
+                                                                ],
+                                                                "allowNew": false,
+                                                                "name": "Last_Term_Display",
+                                                                "allowModify": false,
+                                                                "pageSize": 5,
+                                                                "model": "REG_STATUS",
+                                                                "allowReload": false,
+                                                                "loadInitially": false,
+                                                                "type": "detail",
+                                                                "parameters": {
+                                                                      "id_param": "$id_Lookup"
+                                                                }
+                                                          },
+                                                          {
+                                                                "allowDelete": false,
+                                                                "components": [
+                                                                      {
+                                                                            "asHtml": false,
+                                                                            "name": "Last_Login_Result_child_1",
+                                                                            "model": "LAST_LOGIN",
+                                                                            "label": "Last Login:",
+                                                                            "loadInitially": false,
+                                                                            "type": "display"
+                                                                      }
+                                                                ],
+                                                                "allowNew": false,
+                                                                "name": "Last_Login_Result",
+                                                                "allowModify": false,
+                                                                "pageSize": 5,
+                                                                "model": "idLookup",
+                                                                "allowReload": false,
+                                                                "loadInitially": true,
+                                                                "type": "detail",
+                                                                "parameters": {
+                                                                      "id_param": "$id_Lookup"
+                                                                }
+                                                          }
+                                                    ],
+                                                    "documentation": "ID_Card_Block Roles_Block",
+                                                    "name": "Roles_Block",
+                                                    "showInitially": false,
+                                                    "label": "Roles",
+                                                    "type": "block"
+                                              }
+                                        ],
+                                        "documentation": "First row includes: Id card information and the Roles block. Items from this block will be set side by side through display flex and padding.",
+                                        "name": "First_Row_Block",
+                                        "showInitially": false,
+                                        "type": "block"
+                                  },
+                                  {
+                                        "components": [
+                                              {
+                                                    "allowDelete": false,
+                                                    "components": [
+                                                          {
+                                                                "asHtml": false,
+                                                                "valueStyle": "bold",
+                                                                "onError": "alert(response.data.errors.errorMessage, {type:\"error\"});",
+                                                                "name": "Account_User_Name",
+                                                                "model": "UNIV_USERNAME",
+                                                                "loadInitially": false,
+                                                                "type": "display"
+                                                          }
+                                                    ],
+                                                    "allowNew": false,
+                                                    "name": "Accounts",
+                                                    "allowModify": false,
+                                                    "pageSize": 5,
+                                                    "model": "idLookup",
+                                                    "label": "Accounts Listed for User:",
+                                                    "allowReload": false,
+                                                    "loadInitially": false,
+                                                    "type": "detail",
+                                                    "parameters": {
+                                                          "id_param": "$id_Lookup"
+                                                    }
+                                              },
+                                              {
+                                                    "allowDelete": false,
+                                                    "components": [
+                                                          {
+                                                                "onError": "alert(response.data.errors.errorMessage, {type:\"error\"});",
+                                                                "readonly": false,
+                                                                "name": "UID_SERVER",
+                                                                "model": "UID_SERVER",
+                                                                "label": "Account",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Account_name",
+                                                                "model": "UID_USER_ID",
+                                                                "loadInitially": false,
+                                                                "label": "Account User ID",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "User_Type",
+                                                                "model": "UID_USER_TYPE",
+                                                                "loadInitially": false,
+                                                                "label": "Account Type",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "UID_STATUS",
+                                                                "model": "UID_STATUS",
+                                                                "loadInitially": false,
+                                                                "label": "Account Status",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          }
+                                                    ],
+                                                    "allowNew": false,
+                                                    "name": "Accounts_Available",
+                                                    "allowModify": false,
+                                                    "pageSize": 5,
+                                                    "model": "ISU_Help_Desk_Accounts",
+                                                    "label": "Available",
+                                                    "allowReload": false,
+                                                    "loadInitially": false,
+                                                    "type": "grid",
+                                                    "parameters": {
+                                                          "id_param": "$id_Lookup"
+                                                    }
+                                              }
+                                        ],
+                                        "name": "Accounts_Block",
+                                        "showInitially": false,
+                                        "label": "ISU Account Information",
+                                        "type": "block"
+                                  },
+                                  {
+                                        "components": [
+                                              {
+                                                    "allowDelete": false,
+                                                    "components": [
+                                                          {
+                                                                "asHtml": false,
+                                                                "components": [],
+                                                                "name": "Campus_Student",
+                                                                "model": "STU_CA",
+                                                                "label": "Campus Address",
+                                                                "loadInitially": false,
+                                                                "type": "display"
+                                                          }
+                                                    ],
+                                                    "allowNew": false,
+                                                    "name": "Student_Address",
+                                                    "allowModify": false,
+                                                    "pageSize": 5,
+                                                    "model": "STU_ADDRESS",
+                                                    "allowReload": false,
+                                                    "loadInitially": false,
+                                                    "type": "detail",
+                                                    "parameters": {
+                                                          "id_param": "$id_Lookup"
+                                                    }
+                                              },
+                                              {
+                                                    "allowDelete": false,
+                                                    "components": [
+                                                          {
+                                                                "asHtml": false,
+                                                                "valueStyle": "scaleTextboxWidth(\"#pbid-Campus_Staff-0\");",
+                                                                "components": [],
+                                                                "onError": "alert(response.data.errors.errorMessage, {type:\"error\"});",
+                                                                "name": "Campus_Staff",
+                                                                "onLoad": "scaleTextboxWidth(#pbid-Campus_Staff-0);",
+                                                                "model": "STAFF_CA",
+                                                                "label": "Campus Address",
+                                                                "loadInitially": false,
+                                                                "type": "display"
+                                                          }
+                                                    ],
+                                                    "allowNew": false,
+                                                    "name": "Staff_Address",
+                                                    "allowModify": false,
+                                                    "pageSize": 5,
+                                                    "model": "STAFF_ADDRESS",
+                                                    "allowReload": false,
+                                                    "loadInitially": false,
+                                                    "type": "detail",
+                                                    "parameters": {
+                                                          "id_param": "$id_Lookup"
+                                                    }
+                                              },
+                                              {
+                                                    "allowDelete": false,
+                                                    "components": [
+                                                          {
+                                                                "asHtml": false,
+                                                                "valueStyle": "width: 500px;",
+                                                                "documentation": "PER_STAFF_EMAIL",
+                                                                "name": "Home",
+                                                                "labelStyle": "",
+                                                                "onLoad": "scaleTextboxWidth(\"pbid-Home-0\");",
+                                                                "model": "HOME",
+                                                                "style": "width: 500px;",
+                                                                "loadInitially": false,
+                                                                "label": "Home",
+                                                                "type": "display"
+                                                          }
+                                                    ],
+                                                    "allowNew": false,
+                                                    "name": "Personal",
+                                                    "allowModify": false,
+                                                    "pageSize": 5,
+                                                    "model": "HOME_ADDRESS",
+                                                    "label": "",
+                                                    "allowReload": false,
+                                                    "loadInitially": false,
+                                                    "type": "detail",
+                                                    "parameters": {
+                                                          "id_param": "$id_Lookup"
+                                                    }
+                                              }
+                                        ],
+                                        "documentation": "Add department, office, and phone for staff (if taking classes do not display student)\n\nif FACULTY and STUDENT, then FACULTY takes priority over STUDENT display (don't show the student stuff)",
+                                        "name": "Address_Block",
+                                        "showInitially": false,
+                                        "label": "Address and Phone",
+                                        "type": "block"
+                                  },
+                                  {
+                                        "components": [
+                                              {
+                                                    "components": [
+                                                          {
+                                                                "allowDelete": false,
+                                                                "components": [
+                                                                      {
+                                                                            "readonly": true,
+                                                                            "name": "FTerm",
+                                                                            "onLoad": "//console.log(typeof $FTerm.SSBSECT_TERM_CODE);",
+                                                                            "model": "SSBSECT_TERM_CODE",
+                                                                            "label": "Term:",
+                                                                            "loadInitially": false,
+                                                                            "type": "text",
+                                                                            "parameters": {},
+                                                                            "value": "",
+                                                                            "validation": {},
+                                                                            "required": false
+                                                                      },
+                                                                      {
+                                                                            "readonly": true,
+                                                                            "name": "FSubject",
+                                                                            "model": "SSBSECT_SUBJ_CODE",
+                                                                            "label": "Subject:",
+                                                                            "loadInitially": false,
+                                                                            "type": "text",
+                                                                            "parameters": {},
+                                                                            "validation": {},
+                                                                            "required": false
+                                                                      },
+                                                                      {
+                                                                            "readonly": true,
+                                                                            "name": "FCourse_Number",
+                                                                            "model": "SSBSECT_CRSE_NUMB",
+                                                                            "label": "Course Number:",
+                                                                            "loadInitially": false,
+                                                                            "type": "text",
+                                                                            "parameters": {},
+                                                                            "validation": {},
+                                                                            "required": false
+                                                                      },
+                                                                      {
+                                                                            "readonly": true,
+                                                                            "name": "FSection",
+                                                                            "model": "SSBSECT_SEQ_NUMB",
+                                                                            "label": "Section Number:",
+                                                                            "loadInitially": false,
+                                                                            "type": "text",
+                                                                            "parameters": {},
+                                                                            "validation": {},
+                                                                            "required": false
+                                                                      },
+                                                                      {
+                                                                            "readonly": true,
+                                                                            "name": "FCRN",
+                                                                            "model": "SSBSECT_CRN",
+                                                                            "label": "CRN:",
+                                                                            "loadInitially": false,
+                                                                            "type": "text",
+                                                                            "parameters": {},
+                                                                            "validation": {},
+                                                                            "required": false
+                                                                      }
+                                                                ],
+                                                                "allowNew": false,
+                                                                "documentation": "Keep course section - Add CRN, remove site and type",
+                                                                "pageSize": 5,
+                                                                "loadInitially": false,
+                                                                "label": "Current Courses Teaching",
+                                                                "type": "grid",
+                                                                "name": "Current_Courses_Teaching",
+                                                                "allowModify": false,
+                                                                "model": "Faculty_Current_Courses",
+                                                                "style": "",
+                                                                "allowReload": false,
+                                                                "parameters": {
+                                                                      "id_param": "$id_Lookup"
+                                                                }
+                                                          }
+                                                    ],
+                                                    "documentation": "EAFF\nCFAC \nProvision Roles\n\nif FACULTY and STUDENT, then FACULTY takes priority over STUDENT display (don't show the student stuff)",
+                                                    "name": "Faculty_Block",
+                                                    "showInitially": false,
+                                                    "label": "Faculty",
+                                                    "type": "block"
+                                              },
+                                              {
+                                                    "components": [
+                                                          {
+                                                                "components": [
+                                                                      {
+                                                                            "name": "Ad_Text",
+                                                                            "labelStyle": "",
+                                                                            "type": "literal",
+                                                                            "value": "<p>Advisor name</p>"
+                                                                      },
+                                                                      {
+                                                                            "readonly": true,
+                                                                            "name": "Ad_Name",
+                                                                            "labelStyle": "",
+                                                                            "style": "",
+                                                                            "model": "",
+                                                                            "label": "",
+                                                                            "loadInitially": false,
+                                                                            "type": "text",
+                                                                            "parameters": {},
+                                                                            "validation": {},
+                                                                            "required": false
+                                                                      }
+                                                                ],
+                                                                "name": "Advisor_Information",
+                                                                "showInitially": false,
+                                                                "style": "",
+                                                                "label": "",
+                                                                "type": "block"
+                                                          },
+                                                          {
+                                                                "allowDelete": false,
+                                                                "components": [
+                                                                      {
+                                                                            "readonly": true,
+                                                                            "name": "Term",
+                                                                            "onLoad": "//console.log(typeof $SSBSECT_TERM_CODE+ 'this is the type');",
+                                                                            "model": "SSBSECT_TERM_CODE",
+                                                                            "label": "Term:",
+                                                                            "loadInitially": false,
+                                                                            "type": "text",
+                                                                            "parameters": {},
+                                                                            "validation": {},
+                                                                            "required": false
+                                                                      },
+                                                                      {
+                                                                            "readonly": true,
+                                                                            "name": "Subject",
+                                                                            "model": "SSBSECT_SUBJ_CODE",
+                                                                            "label": "Subject:",
+                                                                            "loadInitially": false,
+                                                                            "type": "text",
+                                                                            "parameters": {},
+                                                                            "validation": {},
+                                                                            "required": false
+                                                                      },
+                                                                      {
+                                                                            "readonly": true,
+                                                                            "name": "Course_Number",
+                                                                            "model": "SSBSECT_CRSE_NUMB",
+                                                                            "label": "Course Number:",
+                                                                            "loadInitially": false,
+                                                                            "type": "text",
+                                                                            "parameters": {},
+                                                                            "validation": {},
+                                                                            "required": false
+                                                                      },
+                                                                      {
+                                                                            "readonly": true,
+                                                                            "name": "Section",
+                                                                            "model": "SSBSECT_SEQ_NUMB",
+                                                                            "label": "Section Number",
+                                                                            "loadInitially": false,
+                                                                            "type": "text",
+                                                                            "parameters": {},
+                                                                            "validation": {},
+                                                                            "required": false
+                                                                      },
+                                                                      {
+                                                                            "readonly": true,
+                                                                            "name": "CRN",
+                                                                            "model": "SSBSECT_CRN",
+                                                                            "label": "CRN",
+                                                                            "loadInitially": false,
+                                                                            "type": "text",
+                                                                            "parameters": {},
+                                                                            "validation": {},
+                                                                            "required": false
+                                                                      }
+                                                                ],
+                                                                "allowNew": false,
+                                                                "documentation": "Keep course section - Add CRN, remove site and type",
+                                                                "pageSize": 5,
+                                                                "loadInitially": false,
+                                                                "label": "Current Enrolled Courses",
+                                                                "type": "grid",
+                                                                "name": "Current_Courses_Taken",
+                                                                "allowModify": false,
+                                                                "onLoad": "function Interagate_Courses_Taken() {\n            for (var i = 0; i < $Current_Courses_TakenDS.data.length; i++){\n                   $Current_Courses_TakenDS.data[i].Subject  = '(' + i + ') Data Origin Testing';\n                    console.log(i);\n               }\n}\n\n\nInteragate_Courses_Taken();",
+                                                                "model": "Student_Current_Courses",
+                                                                "style": "",
+                                                                "allowReload": false,
+                                                                "parameters": {
+                                                                      "id_param": "$id_Lookup"
+                                                                }
+                                                          }
+                                                    ],
+                                                    "documentation": "CSTU\nFor = certain \n\nSTUDENT",
+                                                    "name": "Student_Block",
+                                                    "showInitially": false,
+                                                    "label": "Student Current Courses",
+                                                    "type": "block"
+                                              }
+                                        ],
+                                        "documentation": "If none available due to roles, have yet to decide to replace empty space with alert",
+                                        "name": "Courses_Block",
+                                        "showInitially": false,
+                                        "label": "Course Information",
+                                        "type": "block"
+                                  },
+                                  {
+                                        "components": [
+                                              {
+                                                    "allowDelete": false,
+                                                    "components": [
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "UAdmin_Status",
+                                                                "model": "ADMISSIONS_STATUS",
+                                                                "label": "Admission Status",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "UAdmission_Term",
+                                                                "model": "ADMIT_TERM",
+                                                                "loadInitially": false,
+                                                                "label": "Term For Admission",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "UAdmission_Date",
+                                                                "model": "APP_DECISION_DATE",
+                                                                "loadInitially": false,
+                                                                "label": "Admission Date",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "UStu_Type",
+                                                                "model": "STUDENT_TYPE",
+                                                                "loadInitially": false,
+                                                                "label": "Student Type",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "UClass_Stand",
+                                                                "model": "CLASS_STANDING",
+                                                                "loadInitially": false,
+                                                                "label": "Class Standing",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "UStu_Classification",
+                                                                "model": "CLASSIFICATION",
+                                                                "loadInitially": false,
+                                                                "label": "Student Classification",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "URegis_Holds",
+                                                                "model": "REGISTRATION_HOLDS",
+                                                                "loadInitially": false,
+                                                                "label": "Registration Holds",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "UGrade_Holds",
+                                                                "model": "GRADE_HOLDS",
+                                                                "loadInitially": false,
+                                                                "label": "Grade Holds",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          }
+                                                    ],
+                                                    "allowNew": false,
+                                                    "pageSize": 5,
+                                                    "label": "Admissions Information",
+                                                    "loadInitially": false,
+                                                    "type": "grid",
+                                                    "name": "U_Current_Student_Information",
+                                                    "allowModify": false,
+                                                    "model": "UGraduate_Admissions_Data",
+                                                    "style": "font-size: 16px;<b></b>",
+                                                    "allowReload": false,
+                                                    "parameters": {
+                                                          "id_param": "$id_Lookup"
+                                                    }
+                                              }
+                                        ],
+                                        "name": "Undergrad_Admission_Block",
+                                        "showInitially": false,
+                                        "type": "block"
+                                  },
+                                  {
+                                        "components": [
+                                              {
+                                                    "allowDelete": false,
+                                                    "components": [
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "G_Admin_Status",
+                                                                "model": "ADMISSIONS_STATUS",
+                                                                "label": "Admission Status",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "G_Admission_Term",
+                                                                "model": "ADMIT_TERM",
+                                                                "loadInitially": false,
+                                                                "label": "Term For Admission",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "G_Admission_Date",
+                                                                "model": "APP_DECISION_DATE",
+                                                                "loadInitially": false,
+                                                                "label": "Admission Date",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "G_Stu_Type",
+                                                                "model": "STUDENT_TYPE",
+                                                                "loadInitially": false,
+                                                                "label": "Student Type",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "G_Class_Stand",
+                                                                "model": "CLASS_STANDING",
+                                                                "loadInitially": false,
+                                                                "label": "Class Standing",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "G_Stu_Classification",
+                                                                "model": "CLASSIFICATION",
+                                                                "loadInitially": false,
+                                                                "label": "Student Classification",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "G_Regis_Holds",
+                                                                "model": "REGISTRATION_HOLDS",
+                                                                "loadInitially": false,
+                                                                "label": "Registration Holds",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "G_Grade_Holds",
+                                                                "model": "GRADE_HOLDS",
+                                                                "loadInitially": false,
+                                                                "label": "Grade Holds",
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          }
+                                                    ],
+                                                    "allowNew": false,
+                                                    "pageSize": 5,
+                                                    "label": "Admissions Information",
+                                                    "loadInitially": false,
+                                                    "type": "grid",
+                                                    "name": "G_Current_Student_Information",
+                                                    "allowModify": false,
+                                                    "onLoad": "//document.getElementById('pbid-Loading-container').style.display = 'none';",
+                                                    "model": "Graduate_Admissions_Data",
+                                                    "style": "font-size: 16px;<b></b>",
+                                                    "allowReload": false,
+                                                    "parameters": {
+                                                          "id_param": "$id_Lookup"
+                                                    }
+                                              }
+                                        ],
+                                        "name": "Grad_Admission_Block",
+                                        "showInitially": false,
+                                        "label": "Current Term and Registration Information",
+                                        "type": "block"
+                                  },
+                                  {
+                                        "components": [
+                                              {
+                                                    "allowDelete": false,
+                                                    "components": [
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Stu_Status",
+                                                                "model": "STUDENT_STATUS",
+                                                                "label": "Student Status",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Last_Terms",
+                                                                "model": "LAST_REG_TERM",
+                                                                "label": "Last Term Registered",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Eligibility",
+                                                                "model": "ELIG_ENR",
+                                                                "label": "Eligible to Register",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          },
+                                                          {
+                                                                "readonly": true,
+                                                                "name": "Registration_Reason",
+                                                                "model": "ELIG_ENR_REASON",
+                                                                "label": "Reason for Registration Status",
+                                                                "loadInitially": false,
+                                                                "type": "text",
+                                                                "parameters": {},
+                                                                "validation": {},
+                                                                "required": false
+                                                          }
+                                                    ],
+                                                    "allowNew": false,
+                                                    "pageSize": 5,
+                                                    "label": "Registration Status",
+                                                    "loadInitially": false,
+                                                    "type": "grid",
+                                                    "name": "Registration_Status",
+                                                    "allowModify": false,
+                                                    "onLoad": "//document.getElementById('pbid-Loading').style.display = 'none';",
+                                                    "model": "REG_STATUS",
+                                                    "style": "",
+                                                    "allowReload": false,
+                                                    "parameters": {
+                                                          "id_param": "$id_Lookup"
+                                                    }
+                                              }
+                                        ],
+                                        "name": "Registration_Block",
+                                        "showInitially": false,
+                                        "type": "block"
+                                  }
+                            ],
+                            "name": "Results_Block",
+                            "showInitially": false,
+                            "style": "",
+                            "type": "block"
+                      }
+                ],
+                "name": "Body",
+                "showInitially": true,
+                "type": "block"
+          },
+          {
+                "components": [
+                      {
+                            "name": "Footer_Info",
+                            "type": "literal",
+                            "value": "<hr>\n<p>\nRELEASE: 5.5/1\n</p>\n<br>\n<p><b>\n2023 Ellucian Company L.P. and its affiliates. </p>"
+                      }
+                ],
+                "name": "Footer",
+                "showInitially": true,
+                "type": "block"
+          },
+          {
+                "onError": "if (response.status == 404)\nalert('invalid resource');\nelse if (response.status == 500) {\nif (response.data.errors.errorMessage)\nalert(response.data.errors.errorMessage);\nelse\nalert(response.data.errors[0].errorMessage);\n}",
+                "documentation": "P ROLES = STUDENT ASTU FSTU CSTU PSTU XSTU P roles = STAFF CFAC CEMP SEMP",
+                "name": "dataLookup",
+                "pageSize": 5,
+                "onLoad": "/*\n//before I change the DIV\nvar originalState = $(\"#pbid-Results_Block\").html();\n//manipulate the DIV\n//...\n//push the state back\n$(\"#pbid-Results_Block\").html(originalState);\n*/\nconsole.log(\"+++++ Data1: On Load\");\n/*\nStudent_Address = ['ASTU', 'FSTU', 'CSTU', 'PSTU', 'XSTU'];\nStaff_Address = ['CFAC','BAFF', 'EAFF', 'CEMP','SEMP'];\n*/\n/*\n==================================DISPLAY==========================================\n*/\n\nif( typeof $dataLookup !== 'undefined'){  console.log(\"Data: \" + $dataLookup.FULL_NAME, $dataLookup.UNIV_USERNAME, $dataLookup.UNIV_ID, $dataLookup.LEGAL_NAME, $dataLookup.CHOSEN_NAME,$dataLookup.SSN, $dataLookup.IROLES, $dataLookup.PIDM, $dataLookup.CARD_ROLE, $dataLookup.CARD_STATUS, $dataLookup.ISO, $dataLookup.PROLES, $dataLookup.IND, $dataLookup.HIRE_DATE, $dataLookup.HIRE_END_DATE, Date($dataLookup.LAST_TERM_REGISTER), Date($dataLookup.LAST_LOGIN), $dataLookup.ADVISOR, $dataLookup.VISITOR_PIDM, $dataLookup.AFFILIATE_END_DATE, typeof $dataLookup.SPONSOR_NAME, 'Web Tailor Role Help Manager? ' + $dataLookup.HELPMGR, 'Web Tailor Role Help? ' + $dataLookup.HELP, $dataLookup.DEPARTMENT\n);\n\n\n/*===================DISPLAY_FIRST_ROW============================*/\n\n$First_Row_Block.$visible = true;\n\n/*===================ID_Card_Block============================*/\n\n\n$ID_Card_Block.$visible = true; \n//$ResultBlock.load();\n$Role= $dataLookup.CARD_ROLE ?? 'N/A';\nif ($dataLookup.ISO.length < 3) {\n$ID_CARD_Number =   'N/A';\n}\nelse {\n$ID_CARD_Number =  $dataLookup.ISO;\n}\n\n//$ID_CARD_Number = $dataLookup.ISO ?? 'N/A';\n//$UserStatus = $dataLookup.CARD_STATUS;\n$Full_Name = $dataLookup.FULL_NAME;\n$Work_Start_Date = $dataLookup.HIRE_DATE;\n//-------------have work end date where appicable -----------------------\n\nlet elementToDisplay = document.getElementById(\"pbid-Work_End_Date-container\");\nif ($dataLookup.HIRE_END_DATE === null) {\n elementToDisplay.style.display = \"none\"; // Hide the element\n}\nelse {\nelementToDisplay.style.display = \"block\"; //  // Display the element\n$Work_End_Date = $dataLookup.HIRE_END_DATE;\n}\n//-----------------Web Tailor Roles Will Determine How Social and Birthdate Display --------------------------------\n   switch (true) {\ncase $dataLookup.HELPMGR === 'Y':\n\n$Birthdate = $dataLookup.BDAY;\n$Social = $dataLookup.SSN;\n\nbreak;\n\ncase $dataLookup.HELP === 'Y':\n\n$Birthdate = 'On File';\n$Social = 'On File';\nbreak;\n\n//--------not sure if we need HELPMGR  case if default case is going to be the same?\n\ndefault:\n\n$Birthdate = $dataLookup.BDAY;\n$Social = $dataLookup.SSN;\n\n}\n\n$Chosen_Name = $dataLookup.CHOSEN_NAME// ?? 'N/A';\n$Username = $dataLookup.UNIV_USERNAME;\n$University_ID = $dataLookup.UNIV_ID;\n//PIDM is hidden\n$User_PIDM = $dataLookup.PIDM;\n$Visitor_PIDM =$dataLookup.VISITOR_PIDM;\n\n//------if null, do not display affiliate sponsor and end date---------------\n\n/*\nif ($dataLookup.AFFILIATE_END_DATE === null) \n{\n         alert('sponsor date is: ' + $dataLookup.AFFILIATE_END_DATE);  \n        $pbid-Affiliate_End_Date-container.$visible = false;\n         }\nelse {\n           $pbid-Affiliate_End_Date-container.$visible = true;\n            $Affiliate_End_Date =  $dataLookup.AFFILIATE_END_DATE;\n\n}\n*/\n\nlet elementToDisplaySponsor = document.getElementById(\"pbid-Affiliate_Sponsor-container\");\nif ($dataLookup.SPONSOR_NAME === 'NAME NOT FOUND FOR PIDM: ') \n{\n elementToDisplaySponsor.style.display = \"none\"; // Hide the element\n}\nelse {\nelementToDisplaySponsor.style.display = \"block\"; //  // Display the element\n$Affiliate_Sponsor= $dataLookup.SPONSOR_NAME;\n}\n\n/*===================Roles_Block============================*/\n\n$Roles_Block.$visible = true; \n\n$I_Roles = $dataLookup.IROLES //.replace(/\\s+/g,' ').trim();\n$(document).ready(function() {\n  $('#pbid-I_Roles').on('input', function() {\n    $(this).css('width', $(this).val().length + 'ch');\n  });\n});\n\n$P_Roles = $dataLookup.PROLES;\n$(document).ready(function() {\n  $('#pbid-P_Roles').on('input', function() {\n    $(this).css('width', $(this).val().length + 'ch');\n  });\n});\n\n$Department = $dataLookup.DEPARTMENT;\n$FERPA.$load();\n$Last_Term_Display.$load();\n$Last_Login_Result.$load();\n//$Last_Login_Result = $dataLookup.Last_Login;\n\n/*\ntry {\n$Last_Login_Result = Date($dataLookup.Last_Login);\n}\ncatch (e)   {\nconsole.error(e);\n}\n*/\n\n/*=================================Address_Block======================================*/\n\n// Example arrays\nvar is_Teaching = [\"CFAC\",\"BAFF\", \"EAFF\"];\nvar Student_Roles = [\"ASTU\", \"FSTU\", \"CSTU\", \"PSTU\", \"XSTU\"];\nvar Staff_Roles = [\"CEMP\",\"SEMP\"];\n\nfunction areKeywordsInArray(keywords, array) {\n    // return keywords.every(keyword => array.includes(keyword));\n    return array.some(word => keywords.includes(word))\n}\n\n\n// Function to check the presence of keywords in array1, array2, or both\nfunction checkKeywordPresence(keywords, array1, array2, array3) {\n    switch (true) {\n        case areKeywordsInArray(keywords, array1) && areKeywordsInArray(keywords, array2):\n            console.log(`All keywords \"${keywords}\" are present in both array1 and array2.`);\n             console.log(\"Keyword matched STAFF and STUDENT array with: \"+keywords);\n               alert('values indicate student and employee');\n                // Add your code here to handle the event for array2\n            $Address_Block.$visible = true;\n            document.getElementById('pbid-Student_Address').style.display = 'none';\n\n            $Staff_Address.$load();\n            $Personal.$load();\n            $Advisor_Information.$visible = true;\n            $Current_Courses_Taken.$load();\n            \n            $Student_Block.$visible = true;\n           $Courses_Block.$visible = true;\n            $Faculty_Block.$visible = false;\n\n            break;\n        case areKeywordsInArray(keywords, array1):\n            console.log(`All keywords \"${keywords}\" are present in array1.`);\n            // Keyword matched words in array2\n            console.log(\"Keyword matched STAFF array with:\");\n            alert('values indicate employee');\n            // Add your code here to handle the event for array2\n        $Address_Block.$visible = true;\n        $Staff_Address.$load();\n        $Personal.$load();\n        $Advisor_Information.$visible = false;\n\n        $Student_Block.$visible = false;\n       $Courses_Block.$visible = false;\n        $Faculty_Block.$visible = false;\n\n        $Grad_Admission_Block.$visible = false;\n\n        $Undergrad_Admission_Block.$visible = false;\n\n        //document.getElementById('pbid-Undergrad_Admission_Block').style.display = 'none';\n\n        //document.getElementById('pbid-Grad_Admission_Block').style.display = 'none';\n\n        //document.getElementById('pbid-Advisor_Information').style.display = 'none';\n\n        //document.getElementById('pbid-Student_Block').style.display = 'none';\n        //document.getElementById('pbid-Faculty_Block').style.display = 'none';\n        //document.getElementById('pbid-Courses_Block').style.display = 'none';\n\n\n\n            break;\n        case areKeywordsInArray(keywords, array2):\n            console.log(`All keywords \"${keywords}\" are present in array2.`);\n             // Keyword matched words in array1\n                console.log(\"Keyword matched STUDENT array with: \"+keywords);\n                alert('values indicate student');\n                // Add your code here to handle the event for array1\n            $Address_Block.$visible = true;\n            $Student_Address.$load();\n            $Personal.$load();\n           $Courses_Block.$visible = true;\n            $Student_Block.$visible = true;\n            $Advisor_Information.$visible = true;\n            $Current_Courses_Taken.$load();\n            $Faculty_Block.$visible = false;\n            $Staff_Address.$visible = false;\n            //document.getElementById('pbid-Faculty_Block').style.display = 'none';\n           //document.getElementById('pbid-Staff_Address').style.display = 'none';\n          \n\n            break;\n        case areKeywordsInArray(keywords, array3):\n            console.log(`All keywords \"${keywords}\" are present in array2.`);\n            // Keyword matched words in array3\n                console.log(\"Keyword matched is_Teaching array with:\"+keywords);\n                alert('values indicate FACULTY');\n                // Add your code here to handle the event for array2\n            alert('CFAC found');\n            $Address_Block.$visible = true;\n            $Staff_Address.$load();\n            $Personal.$load();\n\n            $Student_Block.$visible = false;\n           // $Courses_Block.$visible = true;\n            $Faculty_Block.$visible = true;\n           // $Current_Courses_Teaching.$load();\n            //document.getElementById('pbid-Student_Block').style.display = 'none';\n            //document.getElementById('pbid-Student_Address').style.display = 'none';\n            //document.getElementById('pbid-Advisor_information').style.display = 'none';\n            //document.getElementById('pbid-Current_Courses_Taken').style.display = 'none';\n            /*\n            //document.getElementById('pbid-Undergrad_Admission_Block').style.display = 'none';\n            //document.getElementById('pbid-Grad_Admission_Block').style.display = 'none';\n            */\n\n            break;\n        default:\n            console.log(`Keywords \"${keywords}\" are not present in array1 or array2 or array3.`);\n    }\n}\n\n// Test cases\ncheckKeywordPresence($P_Roles, Staff_Roles, Student_Roles, is_Teaching);\n// checkKeywordPresence([\"$P_Roles\"], array1, array2);\n// checkKeywordPresence([\"$P_Roles\"], array1, array2);\n// checkKeywordPresence([\"$P_Roles\"], array1, array2);\n\nconsole.log('Proles:'+$P_Roles+ 'with type:' + typeof $P_Roles);\n/*=======================Courses_Block==================================== */\n\n$Ad_Name = $dataLookup.ADVISOR\n\n}",
+                "model": "idLookup",
+                "loadInitially": false,
+                "type": "data",
+                "parameters": {
+                      "id_param": "$id_Lookup"
+                }
+          },
+          {
+                "onError": "alert(response.data.errors.errorMessage, {type:\"error\"});",
+                "documentation": "Purpose of this component is to determine educational grade level of student. If a graduate student, the G_Current_Student Block will show. If an undergraduate student, the U_Current_Student_Block will show. This is done by reading the SARADAP_LEVL_CODE taken from the query SARADAP_LEVL Resource (attached to component and at the top of the Page). If none are displayed or value = NULL, then no blocks should display",
+                "name": "Education_Level_Lookup",
+                "pageSize": 5,
+                "onLoad": "console.log(\"+++++ Education Level Code: On Load\");\n//let code = $Education_Level_Lookup.SARADAP_LEVL_CODE;\n \nif( typeof $Education_Level_Lookup!== 'undefined'){  console.log(\"Data: \" + \n$Education_Level_Lookup.SARADAP_LEVL_CODE);\nlet code = $Education_Level_Lookup.SARADAP_LEVL_CODE;\n\nswitch (code){\ncase 'G':\n\n$Student_Block.$visible = true;\n$Undergrad_Admission_Block.$visible = false;\n//document.getElementById('pbid-Undergrad_Admission_Block').style.display = 'none';\n\n$Grad_Admission_Block.$visible = true;\n$Registration_Block.$visible = true;\n$Registration_Status.$load();\n\n$G_Current_Student_Information.$load();\n\n$Current_Courses_Taken.$load();\nbreak;\n\ncase 'U':\n$Grad_Admission_Block.$visible = false;\n//document.getElementById('pbid-Grad_Admission_Block').style.display = 'none';\n\n\n$Current_Courses_Taken.$load();\n$Student_Block.$visible = true;\n$Registration_Block.$visible = true;\n$Registration_Status.$load();\n\n$Undergrad_Admission_Block.$visible = true;\n$U_Current_Student_Information.$load();\nbreak;\n}\n}else {\n$Student_Block.$visible = false;\n$Registration_Block.$visible = false;\n//$Undergrad_Admission_Block.$visible = false;\n//$Grad_Admission_Block.$visible = false;\n$Registration_Block.$visible = false;\n}",
+                "model": "HELP_DESK_SARADAP_LEVL_CODE",
+                "loadInitially": false,
+                "type": "data",
+                "parameters": {
+                      "id_param": "$id_Lookup"
+                }
+          },
+          {
+                "documentation": "make text box dynamic; center text for grids/labels; clear cache with updated searches; make label text bigger; mask first 5 (in SQL or here); sep page by div according to flow chart",
+                "name": "JS_Functions",
+                "type": "literal",
+                "value": "<script>\nfunction scaleTextboxWidth(elementId) {\n  const textbox = document.getElementById(elementId);\n  textbox.style.width = (textbox.scrollWidth + 50) + \"px\";\n}\n// Example usage\n//scaleTextboxWidth(\"pbid-I_Roles\");\n//scaleTextboxWidth(\"pbid-P_Roles\");\n//scaleTextboxWidth(\"pbid-Campus_Staff-0\");\n//scaleTextboxWidth(\"pbid-Campus_Staff-0\");\n\n\n\n    $('#pbid-DIRXMIL').click(function(){\n         DIR_Event();\n      });\nfunction DIR_Event(){\n\n      var Univ_ID_Value = $('#pbid-University_ID').val();\n      var User_PIDM_Value = $('#pbid-User_PIDM').val();\n      var ID_PARAM_VALUE = $('#pbid-ID_Text_Field').val();\n      var PARM_USER_PIDM_Value = $('#pbid-Visitor_PIDM').val();\n      var data = {ID_PARAM: ID_PARAM_VALUE,  \n                          PIDM: User_PIDM_Value,\n                          UNIV_ID: Univ_ID_Value,\n                          PARM_USER_PIDM: PARM_USER_PIDM_Value\n};\n\n       console.log('values'+ User_PIDM_Value + ' ' + Univ_ID_Value);\n       console.log(JSON.stringify(data));\n\n          $.ajax({\n        url: 'https://clnt-bansvc.indstate.edu/BannerExtensibility/internalPb/virtualDomains.ISU_Help_Desk_Manager',\n        type: 'POST',\n        contentType: 'application/json', // Set the Content-Type header to JSON\n        data: JSON.stringify(data), // Convert data to JSON string\n        success: function(result) {\n             alert('Record added');        \n//displayMessage('Record successfully updated!', 3000);  \n             },\n        error: function(request, status, error) {\n           alert(request.responseText);\n        }\n    });\n};\n</script>\n\n\n<script>\n$(document).ready(function() {\n  $(\"#pbid-ID_Text_Field\").keypress(function(event) {\n    if (event.which === 13) { // Check if the Enter key is pressed (keyCode 13)\n      $(\"#pbid-Submit\").click(); // Trigger a click event on the search button\n    }\n  });\n\n  $(\"#searchButton\").click(function() {\n    // Your search button click event code here\n    alert(\"Search button clicked!\");\n  });\n});\n</script>"
+          },
+          {
+                "resource": "virtualDomains.REGISTRATION_ENROLLMENT",
+                "name": "REG_ENROLLMENT",
+                "type": "resource",
+                "staticData": []
+          },
+          {
+                "resource": "virtualDomains.ISU_HELP_DESK_REG_STATUS",
+                "name": "REG_STATUS",
+                "type": "resource",
+                "staticData": []
+          },
+          {
+                "resource": "virtualDomains.HELP_DESK_ADMIN_REG_UGRAD",
+                "name": "UGraduate_Admissions_Data",
+                "type": "resource",
+                "staticData": []
+          },
+          {
+                "resource": "virtualDomains.HELP_DESK_ADMIN_REG_GRAD",
+                "name": "Graduate_Admissions_Data",
+                "type": "resource",
+                "staticData": []
+          },
+          {
+                "resource": "virtualDomains.ISU_HELP_DESK_COURSE_CURRENT_TERM_STUDENT",
+                "name": "Student_Current_Courses",
+                "type": "resource",
+                "staticData": []
+          },
+          {
+                "resource": "virtualDomains.ISU_HELP_DESK_COURSE_CURRENT_TERM_FACULTY",
+                "name": "Faculty_Current_Courses",
+                "type": "resource",
+                "staticData": []
+          },
+          {
+                "resource": "virtualDomains.ISU_HELP_DESK_HOMEADDRESS",
+                "name": "HOME_ADDRESS",
+                "type": "resource",
+                "staticData": []
+          },
+          {
+                "resource": "virtualDomains.ISU_HELP_DESK_STU_CA_ADDRESS",
+                "name": "STU_ADDRESS",
+                "type": "resource",
+                "staticData": []
+          },
+          {
+                "resource": "virtualDomains.ISU_HELP_DESK_STAFF_CA_ADDRESS",
+                "name": "STAFF_ADDRESS",
+                "type": "resource",
+                "staticData": []
+          }
+    ],
+    "name": "ISUHelpManagerPage",
+    "style": "Help_Desk_Styles",
+    "type": "page"
+}
